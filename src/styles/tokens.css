@@ -1,0 +1,23 @@
+/* ─────────────────────────────────────────────────────────
+   Design tokens — edit these to restyle the whole portfolio
+   ───────────────────────────────────────────────────────── */
+:root {
+  /* Brand colours */
+  --rust:     #E8491D;
+  --rust-dim: #B83A16;
+  --amber:    #F5A623;
+
+  /* Background scale (darkest → lightest) */
+  --bg:  #0A0B0E;
+  --bg1: #10121A;
+  --bg2: #161A26;
+  --bg3: #1E2333;
+
+  /* Text */
+  --text:  #E4E6ED;
+  --muted: #6B7280;
+
+  /* Misc */
+  --line:    rgba(232, 73, 29, 0.18);
+  --code-bg: #0D1117;
+}
