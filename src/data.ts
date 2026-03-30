@@ -313,7 +313,6 @@ export const contact = {
     { href: 'mailto:ikramarenko.dev@gmail.com', icon: 'email', label: 'ikramarenko.dev@gmail.com' },
     { href: 'https://github.com/ivankram', icon: 'github', label: 'github.com/ivankram' },
     { href: 'https://ivankram.github.io/', icon: 'globe', label: 'hashpigz blog' },
-    { href: 'tel:REDACTED', icon: 'phone', label: 'REDACTED' },
   ] satisfies ContactLink[],
 };
 

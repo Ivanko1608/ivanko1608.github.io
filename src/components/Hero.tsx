@@ -105,7 +105,7 @@ const styles = {
     alignItems: 'center',
     overflow:   'hidden',
     background: 'var(--bg)',
-    paddingTop: 'var(--header-h, 80px)',
+    paddingTop: 'calc(var(--header-h, 80px) + 1.5rem)',
   } as React.CSSProperties,
 
   gridBg: {
