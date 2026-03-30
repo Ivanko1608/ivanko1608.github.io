@@ -7,7 +7,13 @@ export function Hero() {
   const [firstName, lastName] = hero.name.split(' ');
 
   return (
-    <div id="hero" className="scanlines" style={{ ...styles.hero, padding: isMobile ? '0 1.5rem' : '0 3rem' }}>
+    <div id="hero" className="scanlines" style={{
+      ...styles.hero,
+      paddingLeft:   isMobile ? '1.5rem' : '3rem',
+      paddingRight:  isMobile ? '1.5rem' : '3rem',
+      paddingBottom: isMobile ? '2.5rem' : undefined,
+      minHeight:     isMobile ? 'auto'   : '100vh',
+    }}>
       {/* Dot-grid background */}
       <div style={styles.gridBg} />
 
@@ -16,16 +22,18 @@ export function Hero() {
 
       <div style={styles.inner}>
         {/* "Available" pill badge */}
-        <div style={styles.tag}>{hero.tagline}</div>
+        <div style={{ ...styles.tag, marginBottom: isMobile ? '1rem' : '1.8rem' }}>
+          {hero.tagline}
+        </div>
 
         {/* Name */}
-        <h1 style={styles.h1}>
+        <h1 style={{ ...styles.h1, fontSize: isMobile ? 'clamp(1.6rem, 8vw, 2.4rem)' : 'clamp(2.6rem, 7vw, 6rem)' }}>
           {firstName}<br />
           <span style={{ color: 'var(--rust)' }}>{lastName}</span>
         </h1>
 
         {/* Subtitle */}
-        <p style={styles.sub}>
+        <p style={{ ...styles.sub, marginTop: isMobile ? '0.8rem' : '1.4rem' }}>
           {hero.subtitle}<br />
           Primary stack:{' '}
           <em style={{ color: 'var(--amber)', fontStyle: 'normal' }}>{hero.stack}</em>{' '}
@@ -33,7 +41,11 @@ export function Hero() {
         </p>
 
         {/* CTA buttons */}
-        <div style={{ ...styles.cta, flexDirection: isMobile ? 'column' : 'row' }}>
+        <div style={{
+          ...styles.cta,
+          flexDirection: isMobile ? 'column' : 'row',
+          marginTop:     isMobile ? '1.2rem' : '2.4rem',
+        }}>
           <a href={`mailto:${hero.ctaEmail}`} style={{ ...styles.btnPrimary, textAlign: 'center', justifyContent: 'center' }}>
             Get in touch →
           </a>
@@ -46,14 +58,16 @@ export function Hero() {
         {/* Stats row */}
         <div style={{
           ...styles.statsRow,
-          gap:                 isMobile ? '1.4rem' : '3rem',
+          marginTop:           isMobile ? '1.8rem' : '3.5rem',
+          paddingTop:          isMobile ? '1.2rem' : '2rem',
+          gap:                 isMobile ? '1rem' : '3rem',
           flexWrap:            'wrap',
           gridTemplateColumns: isMobile ? 'repeat(2, 1fr)' : undefined,
           display:             isMobile ? 'grid' : 'flex',
         }}>
           {stats.map((stat) => (
             <div key={stat.label}>
-              <div style={styles.statNum}>
+              <div style={{ ...styles.statNum, fontSize: isMobile ? '1.6rem' : '2.2rem' }}>
                 {stat.value.replace(/[^0-9kK]/g, '')}
                 <span style={{ color: 'var(--rust)' }}>
                   {stat.value.replace(/[0-9kK]/g, '')}
@@ -91,6 +105,7 @@ const styles = {
     alignItems: 'center',
     overflow:   'hidden',
     background: 'var(--bg)',
+    paddingTop: 'var(--header-h, 80px)',
   } as React.CSSProperties,
 
   gridBg: {
@@ -140,15 +155,16 @@ const styles = {
     fontFamily:    "'Syne', sans-serif",
     fontSize:      'clamp(2.6rem, 7vw, 6rem)',
     fontWeight:    800,
-    lineHeight:    1.0,
+    lineHeight:    1.05,
     letterSpacing: '-0.02em',
     color:         'var(--text)',
+    overflowWrap:  'break-word',
     animation:     'fadeUp 0.7s 0.1s ease both',
   } as React.CSSProperties,
 
   sub: {
     fontFamily: "'JetBrains Mono', monospace",
-    fontSize:   'clamp(0.85rem, 2.5vw, 1.05rem)',
+    fontSize:   'clamp(0.82rem, 3.5vw, 1.05rem)',
     color:      'var(--muted)',
     marginTop:  '1.4rem',
     maxWidth:   '560px',

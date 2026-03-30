@@ -1,13 +1,13 @@
 import { useEffect, useRef } from 'react';
 import { useScrollReveal } from './hooks/useScrollReveal';
-import { Navbar }             from './components/Navbar';
-import { Hero }               from './components/Hero';
-import { About }              from './components/About';
-import { Experience }         from './components/Experience';
-import { Skills }             from './components/Skills';
-import { Security }           from './components/Security';
-import { Contact }            from './components/Contact';
-import { Footer }             from './components/Footer';
+import { Navbar } from './components/Navbar';
+import { Hero } from './components/Hero';
+import { About } from './components/About';
+import { Experience } from './components/Experience';
+import { Skills } from './components/Skills';
+import { Security } from './components/Security';
+import { Contact } from './components/Contact';
+import { Footer } from './components/Footer';
 import { GithubNoticeBanner } from './components/GithubNoticeBanner';
 
 export default function App() {
@@ -28,9 +28,9 @@ export default function App() {
 
   return (
     <>
-      <div ref={headerRef} style={{ position: 'sticky', top: 0, zIndex: 100 }}>
-        <GithubNoticeBanner />
+      <div ref={headerRef} style={{ position: 'fixed', top: 0, left: 0, right: 0, zIndex: 100 }}>
         <Navbar />
+        <GithubNoticeBanner />
       </div>
       <Hero />
       <About />

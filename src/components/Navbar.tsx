@@ -149,6 +149,11 @@ const styles = {
   } as React.CSSProperties,
 
   drawer: {
+    position:       'fixed',
+    top:            'var(--header-h, 92px)',
+    left:           0,
+    right:          0,
+    zIndex:         99,
     background:     'rgba(10,11,14,0.97)',
     backdropFilter: 'blur(16px)',
     borderBottom:   '1px solid var(--line)',

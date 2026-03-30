@@ -27,7 +27,7 @@ export function About() {
 
       <div style={{ ...styles.grid, gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr', gap: isMobile ? '2.5rem' : '4rem' }}>
         {/* Left — bio + language bars */}
-        <div className="reveal">
+        <div className="reveal" style={{ minWidth: 0 }}>
           {about.paragraphs.map((para, i) => (
             <p key={i} style={styles.para}><InlineMarkdown text={para} /></p>
           ))}
@@ -73,6 +73,7 @@ export function About() {
 const styles = {
   section: {
     maxWidth:  '1100px',
+    width:     '100%',
     margin:    '0 auto',
     borderTop: '1px solid var(--line)',
   } as React.CSSProperties,
@@ -129,6 +130,7 @@ const styles = {
     borderLeft:   '3px solid var(--rust)',
     borderRadius: '6px',
     padding:      '1.8rem',
+    minWidth:     0,
   } as React.CSSProperties,
 
   rustCardHeading: {
