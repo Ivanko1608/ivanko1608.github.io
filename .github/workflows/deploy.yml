@@ -35,7 +35,8 @@ jobs:
       - name: Build
         run: pnpm build
         env:
-          BASE_PATH: /${{ github.event.repository.name }}/
+          BASE_PATH: /
+          FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
       - uses: actions/upload-pages-artifact@v3
         with:
