@@ -64,7 +64,7 @@ export const hero = {
   subtitle: 'Backend Engineer & Team Lead building high-throughput distributed systems.',
   stack: 'Node.js · Go · Rust',
   stackNote: '— transitioning deeper into systems programming with Rust.',
-  ctaEmail: 'ikramarenko.dev@gmail.com',
+  ctaEmail: 'cv.reboot220@aleeas.com',
   githubUrl: 'https://github.com/ivankram',
   blogUrl: 'https://ivankram.github.io/',
 };
@@ -310,7 +310,7 @@ export const contact = {
   subtext: 'Open to remote roles with EU-based teams. Particularly interested in Rust.',
   euNote: '🌍 EU availability: C2 English · C1 Spanish · Open to CET/CEST timezones · No relocation required',
   links: [
-    { href: 'mailto:ikramarenko.dev@gmail.com', icon: 'email', label: 'ikramarenko.dev@gmail.com' },
+    { href: 'mailto:cv.reboot220@aleeas.com', icon: 'email', label: 'cv.reboot220@aleeas.com' },
     { href: 'https://github.com/ivankram', icon: 'github', label: 'github.com/ivankram' },
     { href: 'https://ivankram.github.io/', icon: 'globe', label: 'hashpigz blog' },
   ] satisfies ContactLink[],
