@@ -1,4 +1,4 @@
-import type { ExperienceItem, Tag } from '../data';
+import type { ExperienceItem, Tag, TechVariant } from '../data';
 import { experience } from '../data';
 import { useMediaQuery } from '../hooks/useMediaQuery';
 
@@ -16,11 +16,12 @@ function Bold({ text }: { text: string }) {
 }
 
 function TagBadge({ tag }: { tag: Tag }) {
-  const variantStyles: Record<Tag['variant'], React.CSSProperties> = {
-    default: { borderColor: 'var(--bg3)', color: 'var(--muted)' },
-    rust: { borderColor: 'var(--rust-dim)', color: 'var(--rust)' },
-    go: { borderColor: '#00ACD7', color: '#00ACD7' },
-    node: { borderColor: '#417E38', color: '#6CC24A' },
+  const variantStyles: Record<TechVariant, React.CSSProperties> = {
+    default:    { borderColor: 'var(--bg3)',      color: 'var(--muted)' },
+    rust:       { borderColor: 'var(--rust-dim)', color: 'var(--rust)' },
+    go:         { borderColor: '#00ACD7',         color: '#00ACD7' },
+    typescript: { borderColor: '#3178C6',         color: '#4F9CF9' },
+    node:       { borderColor: '#417E38',         color: '#6CC24A' },
   };
   return (
     <span style={{ ...styles.tag, ...variantStyles[tag.variant] }}>

@@ -27,9 +27,11 @@ export interface ExperienceItem {
   current?: boolean;         // highlights the timeline dot
 }
 
+export type TechVariant = 'default' | 'rust' | 'go' | 'node' | 'typescript';
+
 export interface Tag {
   label: string;
-  variant: 'default' | 'rust' | 'go' | 'node';
+  variant: TechVariant;
 }
 
 export interface SkillCategory {
@@ -40,7 +42,7 @@ export interface SkillCategory {
 
 export interface Pill {
   label: string;
-  highlight?: boolean;       // renders with rust accent styling
+  variant?: TechVariant;
 }
 
 export interface BlogPost {
@@ -171,7 +173,7 @@ export const experience: ExperienceItem[] = [
     bullets: [],
     tags: [
       { label: 'Node.js', variant: 'node' },
-      { label: 'TypeScript', variant: 'default' },
+      { label: 'TypeScript', variant: 'typescript' },
       { label: 'REST', variant: 'default' },
       { label: 'International team', variant: 'default' },
     ],
@@ -198,19 +200,19 @@ export const skillCategories: SkillCategory[] = [
     title: '🦀 Rust (actively developing)',
     featured: true,
     pills: [
-      { label: 'Rust', highlight: true },
-      { label: 'Tokio', highlight: true },
-      { label: 'async/await', highlight: true },
-      { label: 'Actix-web', highlight: true },
+      { label: 'Rust', variant: 'rust' },
+      { label: 'Tokio', variant: 'rust' },
+      { label: 'async/await', variant: 'rust' },
+      { label: 'Actix-web', variant: 'rust' },
       { label: 'High-perf backend' },
     ],
   },
   {
     title: 'Backend',
     pills: [
-      { label: 'Node.js', highlight: true },
-      { label: 'Go', highlight: true },
-      { label: 'TypeScript', highlight: true },
+      { label: 'Node.js', variant: 'node' },
+      { label: 'Go', variant: 'go' },
+      { label: 'TypeScript', variant: 'typescript' },
       { label: 'NestJS' },
       { label: 'Express.js' },
       { label: 'REST' },
@@ -318,6 +320,6 @@ export const contact = {
 
 export const footer = {
   copyright: '© 2025 Ivan Kramarenko',
-  tagline: '// built with Claude and some guidance by me, I\'m not good at frontend',
+  tagline: '// designed & built with React, Tailwind, and a lot of TypeScript',
   location: 'Mallorca · Remote',
 };

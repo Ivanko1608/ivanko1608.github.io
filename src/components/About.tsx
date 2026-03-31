@@ -54,15 +54,15 @@ export function About() {
 
           {/* Syntax-highlighted Rust snippet */}
           <div style={styles.codeBlock}>
-            <span style={styles.co}>{'// the goal: own memory, own performance'}</span>{'\n'}
+            <span style={styles.co}>{'// zero-cost abstractions, fearless concurrency'}</span>{'\n'}
             <span style={styles.kw}>async fn </span>
-            <span style={styles.fn}>handle_conversion</span>({'\n'}
-            {'    '}state: <span style={styles.ty}>Arc</span>{'<'}<span style={styles.ty}>AppState</span>{'>'},{'\n'}
-            {'    '}ev:    <span style={styles.ty}>ConversionEvent</span>,{'\n'}
-            {') -> '}<span style={styles.ty}>Result</span>{'<(), '}<span style={styles.ty}>AppError</span>{'> {'}{'\n'}
-            {'    '}state.kafka.send(<span style={styles.st}>"conversions"</span>, ev).await?;{'\n'}
-            {'    '}<span style={styles.ty}>Ok</span>(())
-            {'\n}'}
+            <span style={styles.fn}>process</span>{'(rx: '}<span style={styles.ty}>Receiver</span>{'<'}<span style={styles.ty}>Event</span>{'>) {'}{'\n'}
+            {'    '}<span style={styles.kw}>while let </span><span style={styles.ty}>Some</span>{'(ev) = rx.recv().await {'}{'\n'}
+            {'        '}<span style={styles.ty}>tokio</span>::spawn(<span style={styles.kw}>async move </span>{'{'}{'\n'}
+            {'            ev.handle().await'}{'\n'}
+            {'        }});'}{'\n'}
+            {'    }'}{'\n'}
+            {'}'}
           </div>
         </div>
       </div>

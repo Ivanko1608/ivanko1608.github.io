@@ -46,11 +46,12 @@ export function Security() {
         <h2>Security Research</h2>
 
         <p style={styles.intro}>
-          Outside of backend work, I research malware and offensive security — published on{' '}
+          Understanding how systems break is part of building systems that don't.
+          I publish malware analysis and offensive security research at{' '}
           <a href={security.blogUrl} target="_blank" rel="noreferrer" style={styles.link}>
             ivankram.github.io
-          </a>.
-          {' '}Deep understanding of low-level system behaviour informs how I design resilient, secure backend systems.
+          </a>
+          {' '}— a practice that directly informs how I approach threat modelling, API hardening, and incident response in production environments.
         </p>
 
         <div style={{ ...styles.grid, gridTemplateColumns: isMobile ? '1fr' : 'repeat(auto-fill, minmax(260px, 1fr))' }}>

@@ -1,10 +1,18 @@
-import type { SkillCategory, Pill } from '../data';
+import type { SkillCategory, Pill, TechVariant } from '../data';
 import { skillCategories } from '../data';
 import { useMediaQuery } from '../hooks/useMediaQuery';
 
+const pillVariantStyles: Record<TechVariant, React.CSSProperties> = {
+  default:    { background: 'var(--bg2)',             border: '1px solid var(--bg3)',      color: 'var(--text)' },
+  rust:       { background: 'rgba(232,73,29,0.12)',   border: '1px solid var(--rust-dim)', color: '#F4A17A' },
+  go:         { background: 'rgba(0,172,215,0.08)',   border: '1px solid #00ACD7',         color: '#00ACD7' },
+  typescript: { background: 'rgba(49,120,198,0.08)',  border: '1px solid #3178C6',         color: '#4F9CF9' },
+  node:       { background: 'rgba(108,194,74,0.08)',  border: '1px solid #417E38',         color: '#6CC24A' },
+};
+
 function PillBadge({ pill }: { pill: Pill }) {
   return (
-    <span style={pill.highlight ? styles.pillHighlight : styles.pill}>
+    <span style={{ ...styles.pill, ...pillVariantStyles[pill.variant ?? 'default'] }}>
       {pill.label}
     </span>
   );
@@ -104,17 +112,5 @@ const styles = {
     fontSize:     '0.73rem',
     padding:      '0.25rem 0.65rem',
     borderRadius: '20px',
-    background:   'var(--bg2)',
-    color:        'var(--text)',
-    border:       '1px solid var(--bg3)',
-  } as React.CSSProperties,
-
-  pillHighlight: {
-    fontSize:     '0.73rem',
-    padding:      '0.25rem 0.65rem',
-    borderRadius: '20px',
-    background:   'rgba(232,73,29,0.12)',
-    border:       '1px solid var(--rust-dim)',
-    color:        '#F4A17A',
   } as React.CSSProperties,
 } as const;
