@@ -17,10 +17,10 @@ function Bold({ text }: { text: string }) {
 
 function TagBadge({ tag }: { tag: Tag }) {
   const variantStyles: Record<Tag['variant'], React.CSSProperties> = {
-    default: { borderColor: 'var(--bg3)',     color: 'var(--muted)' },
-    rust:    { borderColor: 'var(--rust-dim)', color: 'var(--rust)'  },
-    go:      { borderColor: '#00ACD7',         color: '#00ACD7'      },
-    node:    { borderColor: '#417E38',         color: '#6CC24A'      },
+    default: { borderColor: 'var(--bg3)', color: 'var(--muted)' },
+    rust: { borderColor: 'var(--rust-dim)', color: 'var(--rust)' },
+    go: { borderColor: '#00ACD7', color: '#00ACD7' },
+    node: { borderColor: '#417E38', color: '#6CC24A' },
   };
   return (
     <span style={{ ...styles.tag, ...variantStyles[tag.variant] }}>
@@ -79,14 +79,14 @@ export function Experience() {
 
 const styles = {
   section: {
-    maxWidth:   'none',
-    borderTop:  '1px solid var(--line)',
+    maxWidth: 'none',
+    borderTop: '1px solid var(--line)',
     background: 'linear-gradient(to bottom, transparent, var(--bg1) 30%, transparent)',
   } as React.CSSProperties,
 
   inner: {
     maxWidth: '860px',
-    margin:   '0 auto',
+    margin: '0 auto',
   } as React.CSSProperties,
 
   timeline: {
@@ -94,55 +94,55 @@ const styles = {
   } as React.CSSProperties,
 
   item: {
-    paddingLeft:   '2.4rem',
+    paddingLeft: '2.4rem',
     paddingBottom: '3.2rem',
-    position:      'relative',
-    borderLeft:    '1px solid',
-    borderImage:   'linear-gradient(to bottom, var(--rust), var(--line), transparent) 1',
+    position: 'relative',
+    borderLeft: '1px solid',
+    borderImage: 'linear-gradient(to bottom, var(--rust), var(--line), transparent) 1',
   } as React.CSSProperties,
 
   dot: {
-    position:     'absolute',
-    left:         '-6px',
-    top:          '0.3rem',
-    width:        '11px',
-    height:       '11px',
+    position: 'absolute',
+    left: '-6px',
+    top: '0.3rem',
+    width: '11px',
+    height: '11px',
     borderRadius: '50%',
-    background:   'var(--bg)',
-    border:       '2px solid var(--rust)',
+    background: 'var(--bg)',
+    border: '2px solid var(--rust)',
   } as React.CSSProperties,
 
   dotActive: {
     background: 'var(--rust)',
-    boxShadow:  '0 0 12px rgba(232,73,29,0.5)',
+    boxShadow: '0 0 12px rgba(232,73,29,0.5)',
   } as React.CSSProperties,
 
   meta: {
-    fontSize:      '0.7rem',
-    color:         'var(--muted)',
+    fontSize: '0.7rem',
+    color: 'var(--muted)',
     letterSpacing: '0.08em',
     textTransform: 'uppercase',
-    marginBottom:  '0.4rem',
+    marginBottom: '0.4rem',
   } as React.CSSProperties,
 
   title: {
-    fontFamily:   "'Syne', sans-serif",
-    fontSize:     '1.1rem',
-    fontWeight:   700,
+    fontFamily: "'Syne', sans-serif",
+    fontSize: '1.1rem',
+    fontWeight: 700,
     marginBottom: '0.2rem',
   } as React.CSSProperties,
 
   company: {
-    color:        'var(--rust)',
-    fontSize:     '0.82rem',
+    color: 'var(--rust)',
+    fontSize: '0.82rem',
     marginBottom: '1rem',
   } as React.CSSProperties,
 
   body: {
-    color:      '#9CA3AF',
-    fontSize:   '0.82rem',
+    color: '#9CA3AF',
+    fontSize: '0.82rem',
     lineHeight: 1.85,
-    maxWidth:   '640px',
+    maxWidth: '640px',
   } as React.CSSProperties,
 
   bulletList: {
@@ -151,29 +151,29 @@ const styles = {
   } as React.CSSProperties,
 
   bulletItem: {
-    display:      'flex',
-    gap:          '0.4rem',
+    display: 'flex',
+    gap: '0.4rem',
     marginBottom: '0.35rem',
   } as React.CSSProperties,
 
   bulletArrow: {
-    color:      'var(--rust)',
+    color: 'var(--rust)',
     flexShrink: 0,
   } as React.CSSProperties,
 
   tagRow: {
-    display:   'flex',
-    flexWrap:  'wrap',
-    gap:       '0.4rem',
+    display: 'flex',
+    flexWrap: 'wrap',
+    gap: '0.4rem',
     marginTop: '0.9rem',
   } as React.CSSProperties,
 
   tag: {
-    fontSize:      '0.68rem',
+    fontSize: '0.68rem',
     letterSpacing: '0.08em',
-    padding:       '0.2rem 0.6rem',
-    borderRadius:  '2px',
-    background:    'var(--bg2)',
-    border:        '1px solid',
+    padding: '0.2rem 0.6rem',
+    borderRadius: '2px',
+    background: 'var(--bg2)',
+    border: '1px solid',
   } as React.CSSProperties,
 } as const;

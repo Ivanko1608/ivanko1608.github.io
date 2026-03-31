@@ -201,20 +201,18 @@ export const skillCategories: SkillCategory[] = [
       { label: 'Rust', highlight: true },
       { label: 'Tokio', highlight: true },
       { label: 'async/await', highlight: true },
-      { label: 'Systems programming', highlight: true },
-      { label: 'Memory safety' },
-      { label: 'Actix-web' },
+      { label: 'Actix-web', highlight: true },
       { label: 'High-perf backend' },
     ],
   },
   {
     title: 'Backend',
     pills: [
-      { label: 'Node.js' },
+      { label: 'Node.js', highlight: true },
+      { label: 'Go', highlight: true },
+      { label: 'TypeScript', highlight: true },
       { label: 'NestJS' },
       { label: 'Express.js' },
-      { label: 'Go' },
-      { label: 'TypeScript' },
       { label: 'REST' },
       { label: 'Protobuf' },
       { label: 'gRPC' },
@@ -308,11 +306,11 @@ export const security = {
 export const contact = {
   heading: "Let's work together",
   subtext: 'Open to remote roles with EU-based teams. Particularly interested in Rust.',
-  euNote: '🌍 EU availability: C2 English · C1 Spanish · Open to CET/CEST timezones · No relocation required',
+  euNote: '🌍 EU availability: C2 English · C1 Spanish · Open to CET/CEST timezones',
   links: [
     { href: 'mailto:cv.reboot220@aleeas.com', icon: 'email', label: 'cv.reboot220@aleeas.com' },
     { href: 'https://github.com/ivankram', icon: 'github', label: 'github.com/ivankram' },
-    { href: 'https://ivankram.github.io/', icon: 'globe', label: 'hashpigz blog' },
+    { href: 'https://ivankram.github.io/', icon: 'globe', label: 'HashPigz security blog' },
   ] satisfies ContactLink[],
 };
 
