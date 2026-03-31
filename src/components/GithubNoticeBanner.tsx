@@ -49,12 +49,12 @@ const styles = {
   close: {
     background: 'transparent',
     border: 'none',
-    color: 'var(--muted)',
+    color: 'var(--rust)',
     cursor: 'pointer',
     fontSize: '0.7rem',
     padding: '0.15rem 0.3rem',
     lineHeight: 1,
     flexShrink: 0,
-    opacity: 0.6,
+    opacity: 0.9,
   } as React.CSSProperties,
 } as const;
