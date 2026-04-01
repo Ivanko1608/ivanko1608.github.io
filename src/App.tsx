@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useScrollReveal } from './hooks/useScrollReveal';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
@@ -9,8 +9,12 @@ import { Security } from './components/Security';
 import { Contact } from './components/Contact';
 import { Footer } from './components/Footer';
 import { GithubNoticeBanner } from './components/GithubNoticeBanner';
+import { Landing } from './components/Landing';
+import { Terminal } from './components/Terminal';
 
-export default function App() {
+type View = 'landing' | 'hr' | 'terminal';
+
+function HrView({ onBack }: { onBack: () => void }) {
   useScrollReveal();
 
   const headerRef = useRef<HTMLDivElement>(null);
@@ -29,7 +33,7 @@ export default function App() {
   return (
     <>
       <div ref={headerRef} style={{ position: 'fixed', top: 0, left: 0, right: 0, zIndex: 100 }}>
-        <Navbar />
+        <Navbar onBack={onBack} />
         <GithubNoticeBanner />
       </div>
       <Hero />
@@ -39,6 +43,18 @@ export default function App() {
       <Security />
       <Contact />
       <Footer />
+    </>
+  );
+}
+
+export default function App() {
+  const [view, setView] = useState<View>('landing');
+
+  return (
+    <>
+      {view === 'landing'  && <Landing onResume={() => setView('hr')} onTerminal={() => setView('terminal')} />}
+      {view === 'hr'       && <HrView onBack={() => setView('landing')} />}
+      {view === 'terminal' && <Terminal onBack={() => setView('landing')} />}
     </>
   );
 }

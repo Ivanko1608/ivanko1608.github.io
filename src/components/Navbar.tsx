@@ -10,7 +10,11 @@ const NAV_LINKS = [
   { href: '#contact',    label: 'Contact'    },
 ];
 
-export function Navbar() {
+interface NavbarProps {
+  onBack?: () => void;
+}
+
+export function Navbar({ onBack }: NavbarProps) {
   const [menuOpen, setMenuOpen] = useState(false);
   const isMobile = useMediaQuery('(max-width: 768px)');
   const [first, ...rest] = hero.name.split(' ');
@@ -20,10 +24,16 @@ export function Navbar() {
   return (
     <>
       <nav style={styles.nav}>
-        {/* Logo */}
-        <a href="#hero" style={styles.logo} onClick={closeMenu}>
-          {first}<span style={styles.logoDot}>.</span>{rest.join(' ')}
-        </a>
+        {/* Logo / Back */}
+        {onBack ? (
+          <button style={styles.backLink} onClick={onBack}>
+            ← back
+          </button>
+        ) : (
+          <a href="#hero" style={styles.logo} onClick={closeMenu}>
+            {first}<span style={styles.logoDot}>.</span>{rest.join(' ')}
+          </a>
+        )}
 
         {/* Desktop links */}
         {!isMobile && (
@@ -94,6 +104,18 @@ const styles = {
     background:     'rgba(10,11,14,0.92)',
     backdropFilter: 'blur(12px)',
     borderBottom:   '1px solid var(--line)',
+  } as React.CSSProperties,
+
+  backLink: {
+    background:     'transparent',
+    border:         'none',
+    color:          'var(--muted)',
+    fontFamily:     "'JetBrains Mono', monospace",
+    fontSize:       '0.78rem',
+    letterSpacing:  '0.06em',
+    cursor:         'pointer',
+    padding:        0,
+    transition:     'color 0.2s',
   } as React.CSSProperties,
 
   logo: {

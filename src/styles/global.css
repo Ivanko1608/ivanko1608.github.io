@@ -75,6 +75,16 @@ body::before {
   50%       { opacity: 0.3; }
 }
 
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
+
+@keyframes sl-move {
+  from { transform: translateX(110vw); }
+  to   { transform: translateX(-110vw); }
+}
+
 /* ── Shared section layout ──────────────────────────────── */
 .section-wrapper {
   padding:    6rem 3rem;
