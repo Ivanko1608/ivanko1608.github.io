@@ -10,6 +10,7 @@ interface OutputLine {
   id: number;
   text: string;
   type?: LineType;
+  action?: string;  // if set, clicking this line runs the command
 }
 
 interface TerminalProps {
@@ -192,23 +193,27 @@ function cmdGitBlame(): OutputLine[] {
   ];
 }
 
+function cmdLine(text: string, cmd: string, type?: LineType): OutputLine {
+  return { id: _id++, text, type, action: cmd };
+}
+
 function cmdHelp(): OutputLine[] {
   return [
     mkLine('Available commands:', 'muted'),
     blank(),
-    mkLine('  whoami        about me'),
-    mkLine('  experience    work history'),
-    mkLine('  skills        tech stack'),
-    mkLine('  contact       get in touch'),
-    mkLine('  ls            list files'),
-    mkLine('  cat <file>    read a file'),
-    mkLine('  clear         clear terminal'),
-    mkLine('  exit          back to landing'),
+    cmdLine('  whoami        about me',        'whoami'),
+    cmdLine('  experience    work history',     'experience'),
+    cmdLine('  skills        tech stack',       'skills'),
+    cmdLine('  contact       get in touch',     'contact'),
+    cmdLine('  ls            list files',       'ls'),
+    mkLine( '  cat <file>    read a file'),
+    cmdLine('  clear         clear terminal',   'clear'),
+    cmdLine('  exit          back to landing',  'exit'),
     blank(),
-    mkLine('  neofetch      system information', 'dim'),
-    mkLine('  git blame     who did this?', 'dim'),
-    mkLine('  sl            steam locomotive', 'dim'),
-    mkLine('  sudo rm -rf / trust the process', 'dim'),
+    cmdLine('  neofetch      system information', 'neofetch', 'dim'),
+    cmdLine('  git blame     who did this?',      'git blame', 'dim'),
+    cmdLine('  sl            steam locomotive',    'sl', 'dim'),
+    cmdLine('  sudo rm -rf / trust the process',   'sudo rm -rf /', 'dim'),
   ];
 }
 
@@ -339,24 +344,9 @@ export function Terminal({ onBack }: TerminalProps) {
     setTimeout(() => setShowSl(false), 6500);
   }, []);
 
-  // ── Autocomplete ─────────────────────────────────────────────────────────────
-
-  const applyCompletion = useCallback((suggestion: string) => {
-    const hasTrail = input.endsWith(' ');
-    const parts    = input.trimStart().split(/\s+/);
-    if (parts.length <= 1 && !hasTrail) {
-      setInput(suggestion + ' ');
-    } else {
-      parts[parts.length - 1] = suggestion;
-      setInput(parts.join(' ') + ' ');
-    }
-    inputRef.current?.focus();
-  }, [input]);
-
   // ── Commands ─────────────────────────────────────────────────────────────────
 
-  const handleSubmit = useCallback(() => {
-    const raw    = input;
+  const execCommand = useCallback((raw: string) => {
     const prompt = mkLine(`ivan@portfolio:~$ ${raw}`, 'dim');
     const cbs: CmdCallbacks = {
       onExit:  onBack,
@@ -368,7 +358,32 @@ export function Terminal({ onBack }: TerminalProps) {
     setHistoryIdx(-1);
     setInput('');
     setHistory(prev => [...prev, prompt, ...output]);
-  }, [input, onBack, handleSl]);
+  }, [onBack, handleSl]);
+
+  // ── Autocomplete ─────────────────────────────────────────────────────────────
+
+  const applyCompletion = useCallback((suggestion: string, execute = false) => {
+    const hasTrail = input.endsWith(' ');
+    const parts    = input.trimStart().split(/\s+/);
+    let completed: string;
+    if (parts.length <= 1 && !hasTrail) {
+      completed = suggestion;
+    } else {
+      parts[parts.length - 1] = suggestion;
+      completed = parts.join(' ');
+    }
+
+    if (execute) {
+      execCommand(completed);
+    } else {
+      setInput(completed + ' ');
+    }
+    inputRef.current?.focus();
+  }, [input, execCommand]);
+
+  const handleSubmit = useCallback(() => {
+    execCommand(input);
+  }, [input, execCommand]);
 
   const handleKeyDown = useCallback((e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
@@ -473,11 +488,13 @@ export function Terminal({ onBack }: TerminalProps) {
           {history.map(l => (
             <div
               key={l.id}
+              onClick={l.action ? () => execCommand(l.action!) : undefined}
               style={{
                 ...styles.shellLine,
                 color:      lineColor(l.type),
                 opacity:    l.type === 'dim' ? 0.55 : 1,
                 fontWeight: l.type === 'rust' ? 600 : 400,
+                ...(l.action ? styles.clickableLine : undefined),
               }}
             >
               {l.text || '\u00a0'}
@@ -488,7 +505,7 @@ export function Terminal({ onBack }: TerminalProps) {
           {suggestions.length > 0 && (
             <div style={styles.pillRow}>
               {suggestions.map(s => (
-                <button key={s} style={styles.pill} onClick={() => applyCompletion(s)}>
+                <button key={s} style={styles.pill} onClick={() => applyCompletion(s, true)}>
                   {s}
                 </button>
               ))}
@@ -600,6 +617,12 @@ const styles = {
     lineHeight: 1.5,
     whiteSpace: 'pre-wrap',
     wordBreak:  'break-word',
+  } as React.CSSProperties,
+
+  clickableLine: {
+    cursor:       'pointer',
+    borderRadius: '2px',
+    transition:   'background 0.15s',
   } as React.CSSProperties,
 
   pillRow: {
