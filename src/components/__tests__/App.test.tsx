@@ -1,4 +1,4 @@
-import { describe, it, expect, vi, beforeAll } from 'vitest';
+import { describe, it, expect, vi, beforeAll, beforeEach } from 'vitest';
 import { render, screen, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import App from '../../App';
@@ -35,6 +35,10 @@ beforeAll(() => {
 });
 
 describe('App', () => {
+  beforeEach(() => {
+    window.location.hash = '';
+  });
+
   it('default view is landing page', () => {
     render(<App />);
     expect(screen.getByText('Ivan Kramarenko')).toBeInTheDocument();

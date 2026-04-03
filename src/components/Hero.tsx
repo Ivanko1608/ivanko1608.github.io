@@ -29,7 +29,7 @@ export function Hero() {
         {/* Name */}
         <h1 style={{ ...styles.h1, fontSize: isMobile ? 'clamp(1.6rem, 8vw, 2.4rem)' : 'clamp(2.6rem, 7vw, 6rem)' }}>
           {firstName}<br />
-          <span style={{ color: 'var(--rust)' }}>{lastName}</span>
+          <span style={{ color: 'var(--rust)', whiteSpace: 'nowrap' }}>{lastName}</span>
         </h1>
 
         {/* Subtitle */}
@@ -68,10 +68,11 @@ export function Hero() {
           {stats.map((stat) => (
             <div key={stat.label}>
               <div style={{ ...styles.statNum, fontSize: isMobile ? '1.6rem' : '2.2rem' }}>
-                {stat.value.replace(/[^0-9kK]/g, '')}
-                <span style={{ color: 'var(--rust)' }}>
-                  {stat.value.replace(/[0-9kK]/g, '')}
-                </span>
+                {stat.value.match(/[0-9kK]+|[^0-9kK]+/g)?.map((part, i) =>
+                  /[0-9kK]/.test(part)
+                    ? <span key={i}>{part}</span>
+                    : <span key={i} style={{ color: 'var(--rust)' }}>{part}</span>
+                )}
               </div>
               <div style={styles.statLabel}>{stat.label}</div>
             </div>

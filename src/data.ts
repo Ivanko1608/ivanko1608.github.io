@@ -63,9 +63,9 @@ export interface ContactLink {
 export const hero = {
   name: 'Ivan Kramarenko',
   tagline: 'Available for EU remote roles',
-  subtitle: 'Backend Engineer & Team Lead building high-throughput distributed systems.',
+  subtitle: 'Backend Engineer & Team Lead. High-throughput systems, low-level curiosity.',
   stack: 'Node.js · Go · Rust',
-  stackNote: '— transitioning deeper into systems programming with Rust.',
+  stackNote: '— moving deeper into systems programming with Rust.',
   ctaEmail: 'cv.reboot220@aleeas.com',
   githubUrl: 'https://github.com/ivankram',
   blogUrl: 'https://ivankram.github.io/',
@@ -73,8 +73,8 @@ export const hero = {
 
 export const stats: Stat[] = [
   { value: '7+', label: 'Years experience' },
-  { value: '5+', label: 'Production systems built' },
-  { value: '1k+', label: 'Daily conversions handled' },
+  { value: 'Top 10', label: 'Standoff 15 CTF' },
+  { value: '16×', label: 'Faster deploys shipped' },
   { value: '3', label: 'Languages spoken' },
 ];
 
@@ -82,9 +82,9 @@ export const stats: Stat[] = [
 
 export const about = {
   paragraphs: [
-    "I'm a backend engineer and team lead with **7+ years** designing systems from scratch — from high-throughput affiliate platforms to 5G Core infrastructure. I've led teams of 3–5, built CI/CD pipelines, and shipped products that stay stable under real production load.",
-    "I've worked across fintech, telecoms, insurance and affiliate marketing — and I'm now focused on bringing that breadth to *European product teams* that care about engineering rigour.",
-    "Outside work I run a security research blog where I publish malware analysis and offensive security writeups — **Standoff 15 finalist, 9th place**.",
+    "Backend engineer and team lead, **7+ years** in. I've built affiliate platforms doing 1k+ conversions/day, worked on 5G Core infrastructure at YADRO, and led small teams (3–5 people) across most of it. Most of what I've shipped is still running.",
+    "Fintech, telecoms, insurance, affiliate marketing. Now looking for a *product team* that takes engineering seriously and ships things that matter.",
+    "I also run a security research blog. Malware analysis, offensive security writeups, CTF stuff. Placed **9th at Standoff 15** (largest offensive security competition in Russia/Central Asia, 3 days, 200+ teams).",
   ],
   languages: [
     { name: 'English', level: 'C2 — Proficient', pct: 100 },
@@ -94,8 +94,8 @@ export const about = {
   rustCard: {
     heading: '⚙ Why Rust, and why now',
     paragraphs: [
-      "I've spent years building performant Node.js and Go services, pushing them as far as they'll go. Rust's memory model, zero-cost abstractions and fearless concurrency are the next logical step for the class of systems I want to build — low-latency message brokers, network proxies, embedded data pipelines.",
-      "I want to join a team where Rust is already in production or actively being adopted, so I can contribute immediately while growing deep expertise.",
+      "I like complex languages. Go is great but deliberately simple. C++ has the expressiveness I want but the tooling and safety story are rough. Rust gives me what C++ does, with memory safety, a real package manager, a compiler that actually helps, and a community I like being part of.",
+      "Looking for a team that already uses Rust in production or is adopting it. I want to write it professionally, not just on weekends.",
     ],
   },
 };
@@ -108,7 +108,7 @@ export const experience: ExperienceItem[] = [
     period: 'Nov 2021 — Present · 4 yr 5 mo',
     title: 'Team Lead — Backend',
     company: 'Boomerang Partners · Affiliate Network (Curaçao MGA licensed)',
-    body: 'Designed and built a high-throughput CPA affiliate network from zero — architecting the backend, establishing engineering processes, and managing a 3–5 person frontend + backend team.',
+    body: 'Built the entire backend for a CPA affiliate network from scratch. Set up engineering processes and managed a 3–5 person team (frontend + backend).',
     bullets: [
       'Reduced time-to-deploy from **2 days → 3 hours** by implementing full CI/CD pipeline',
       'Platform handles **1,000+ conversions/day** across active offers',
@@ -132,11 +132,11 @@ export const experience: ExperienceItem[] = [
     period: 'Jul 2023 — Sep 2024 · 1 yr 3 mo',
     title: 'Senior Golang Engineer',
     company: 'YADRO · 5G Core Infrastructure',
-    body: 'Built high-performance microservices for 5G Core infrastructure targeting broadband access in remote regions. Worked in C++/Go cross-team with strict latency requirements.',
+    body: 'Go and C++ work on 5G Core infrastructure. Wrote microservices, bridged legacy LTE/4G systems to the new 5G stack, and worked across language boundaries daily.',
     bullets: [
-      'Introduced Protobuf interface generation from OpenAPI — eliminated manual contract drift between Go and C++ services',
-      'Responsible for cross-team communication between Go and C++ codebases via Protobuf',
-      'Contributed to components improving network throughput and fault tolerance',
+      'Sole author of the Go microservice bridging the management console to 5G Core (pass-through layer)',
+      'Acted as cross-language intermediary (Go + C++) to integrate legacy LTE/4G management software with 5G Core systems',
+      'Introduced automatic code generation from Protobuf and OpenAPI specs — eliminated manual contract drift',
     ],
     tags: [
       { label: 'Go', variant: 'go' },
@@ -152,7 +152,7 @@ export const experience: ExperienceItem[] = [
     period: 'Dec 2022 — Aug 2023 · 9 mo',
     title: 'Lead Node.js Developer',
     company: 'VSK Insurance (A++ rated) · Fintech / Insurance',
-    body: 'Developed and led backend services for the agent self-service portal at one of Russia\'s largest insurers (33M+ insured citizens).',
+    body: 'Backend services for the agent portal at one of Russia\'s largest insurers (33M+ insured). Led the backend side.',
     bullets: [
       'First on team to introduce unit tests — raised new service coverage to **88%**',
       'Introduced git hooks (Husky) — reduced bug rate by **10%**',
@@ -169,8 +169,11 @@ export const experience: ExperienceItem[] = [
     period: 'Jan 2022 — Oct 2022 · 10 mo',
     title: 'Node.js Software Engineer',
     company: 'LANIT · EdTech Platform',
-    body: 'Backend development in an international team building an EdTech platform. Code review, cross-team communication and API design.',
-    bullets: [],
+    body: 'Backend dev on an EdTech platform, international team. API design and code review.',
+    bullets: [
+      'Kicked off TypeScript migration of the existing JavaScript codebase',
+      'Wrote tests across the platform — first structured testing effort on the team',
+    ],
     tags: [
       { label: 'Node.js', variant: 'node' },
       { label: 'TypeScript', variant: 'typescript' },
@@ -182,7 +185,7 @@ export const experience: ExperienceItem[] = [
     period: 'Dec 2018 — Nov 2021 · 3 yr',
     title: 'Freelance Fullstack Developer',
     company: 'Independent · Moscow',
-    body: 'Built and shipped web applications and mobile backends independently. Consulting on architecture and development processes.',
+    body: 'Freelance web and mobile backend development — hundreds of projects across multiple languages and stacks.',
     bullets: [],
     tags: [
       { label: 'Node.js', variant: 'node' },
@@ -239,7 +242,6 @@ export const skillCategories: SkillCategory[] = [
     pills: [
       { label: 'PostgreSQL' },
       { label: 'MySQL' },
-      { label: 'Redis' },
       { label: 'Prisma' },
     ],
   },
@@ -262,10 +264,7 @@ export const skillCategories: SkillCategory[] = [
       { label: 'Malware analysis' },
       { label: 'Reverse engineering' },
       { label: 'Offensive security' },
-      { label: 'Git' },
       { label: 'C++' },
-      { label: 'Ginkgo' },
-      { label: 'Husky' },
     ],
   },
 ];
@@ -274,7 +273,7 @@ export const skillCategories: SkillCategory[] = [
 
 export const security = {
   blogUrl: 'https://ivankram.github.io/',
-  ctfBadge: '🏆 Standoff 15 CTF — finalist · 2025',
+  ctfBadge: '🏆 Standoff 15 CTF — 9th place · 200+ teams · 3-day live event',
   posts: [
     {
       url: 'https://ivankram.github.io/posts/2024-10-11-discord-phantom-miner',
@@ -284,19 +283,19 @@ export const security = {
     },
     {
       url: 'https://ivankram.github.io/posts/2024-10-01-monteverde-htb-writeup',
-      tag: 'Offensive · HTB',
+      tag: 'Offensive',
       title: 'HTB Monteverde — Azure AD Connect Exploit & DCSync',
       date: 'Oct 1, 2024',
     },
     {
       url: 'https://ivankram.github.io/posts/2024-09-24-sauna-htb-writeup',
-      tag: 'Offensive · HTB',
+      tag: 'Offensive',
       title: 'HTB Sauna — Kerberos No-Preauth, winPEAS & Mimikatz LSASS dump',
       date: 'Sep 24, 2024',
     },
     {
       url: 'https://ivankram.github.io/posts/2024-09-20-streamio-htb-writeup',
-      tag: 'Offensive · HTB',
+      tag: 'Offensive',
       title: 'HTB Streamio — SQL injection, PHP RFI & Bloodhound pivoting',
       date: 'Sep 20, 2024',
     },
@@ -307,7 +306,7 @@ export const security = {
 
 export const contact = {
   heading: "Let's work together",
-  subtext: 'Open to remote roles with EU-based teams. Particularly interested in Rust.',
+  subtext: 'Open to remote roles. Especially interested in Rust.',
   euNote: '🌍 EU availability: C2 English · C1 Spanish · Open to CET/CEST timezones',
   links: [
     { href: 'mailto:cv.reboot220@aleeas.com', icon: 'email', label: 'cv.reboot220@aleeas.com' },

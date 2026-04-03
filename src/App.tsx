@@ -47,14 +47,33 @@ function HrView({ onBack }: { onBack: () => void }) {
   );
 }
 
+function viewFromHash(): View {
+  const h = window.location.hash.replace('#', '');
+  if (h === 'resume') return 'hr';
+  if (h === 'terminal') return 'terminal';
+  return 'landing';
+}
+
 export default function App() {
-  const [view, setView] = useState<View>('landing');
+  const [view, setView] = useState<View>(viewFromHash);
+
+  useEffect(() => {
+    const onPop = () => setView(viewFromHash());
+    window.addEventListener('popstate', onPop);
+    return () => window.removeEventListener('popstate', onPop);
+  }, []);
+
+  const navigate = (v: View) => {
+    const hash = v === 'hr' ? '#resume' : v === 'terminal' ? '#terminal' : '';
+    window.history.pushState(null, '', hash || window.location.pathname);
+    setView(v);
+  };
 
   return (
     <>
-      {view === 'landing'  && <Landing onResume={() => setView('hr')} onTerminal={() => setView('terminal')} />}
-      {view === 'hr'       && <HrView onBack={() => setView('landing')} />}
-      {view === 'terminal' && <Terminal onBack={() => setView('landing')} />}
+      {view === 'landing'  && <Landing onResume={() => navigate('hr')} onTerminal={() => navigate('terminal')} />}
+      {view === 'hr'       && <HrView onBack={() => navigate('landing')} />}
+      {view === 'terminal' && <Terminal onBack={() => navigate('landing')} />}
     </>
   );
 }

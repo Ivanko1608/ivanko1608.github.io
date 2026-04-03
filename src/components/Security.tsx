@@ -46,12 +46,11 @@ export function Security() {
         <h2>Security Research</h2>
 
         <p style={styles.intro}>
-          Understanding how systems break is part of building systems that don't.
           I publish malware analysis and offensive security research at{' '}
           <a href={security.blogUrl} target="_blank" rel="noreferrer" style={styles.link}>
             ivankram.github.io
           </a>
-          {' '}— a practice that directly informs how I approach threat modelling, API hardening, and incident response in production environments.
+          . Breaking things makes you better at building them, and it keeps the work interesting.
         </p>
 
         <div style={{ ...styles.grid, gridTemplateColumns: isMobile ? '1fr' : 'repeat(auto-fill, minmax(260px, 1fr))' }}>

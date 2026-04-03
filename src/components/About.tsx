@@ -52,18 +52,22 @@ export function About() {
             <p key={i} style={styles.rustCardPara}>{para}</p>
           ))}
 
-          {/* Syntax-highlighted Rust snippet */}
-          <div style={styles.codeBlock}>
-            <span style={styles.co}>{'// zero-cost abstractions, fearless concurrency'}</span>{'\n'}
-            <span style={styles.kw}>async fn </span>
-            <span style={styles.fn}>process</span>{'(rx: '}<span style={styles.ty}>Receiver</span>{'<'}<span style={styles.ty}>Event</span>{'>) {'}{'\n'}
-            {'    '}<span style={styles.kw}>while let </span><span style={styles.ty}>Some</span>{'(ev) = rx.recv().await {'}{'\n'}
-            {'        '}<span style={styles.ty}>tokio</span>::spawn(<span style={styles.kw}>async move </span>{'{'}{'\n'}
-            {'            ev.handle().await'}{'\n'}
-            {'        }});'}{'\n'}
-            {'    }'}{'\n'}
-            {'}'}
-          </div>
+          {/* diy-term project card */}
+          <a
+            href="https://github.com/Ivanko1608/diy-term"
+            target="_blank"
+            rel="noreferrer"
+            style={styles.projectCard}
+            onMouseEnter={e => { e.currentTarget.style.borderColor = 'var(--rust-dim)'; }}
+            onMouseLeave={e => { e.currentTarget.style.borderColor = 'var(--bg3)'; }}
+          >
+            <div style={styles.projectLabel}>Featured project</div>
+            <div style={styles.projectName}>diy-term</div>
+            <div style={styles.projectDesc}>
+              A shell built from scratch in Rust — stdlib only, zero crates.
+            </div>
+            <div style={styles.projectLink}>View on GitHub →</div>
+          </a>
         </div>
       </div>
     </section>
@@ -148,23 +152,43 @@ const styles = {
     marginBottom: '0.8rem',
   } as React.CSSProperties,
 
-  codeBlock: {
-    background:   'var(--code-bg)',
-    border:       '1px solid var(--bg3)',
-    borderRadius: '4px',
-    padding:      '1rem 1.2rem',
-    fontSize:     '0.75rem',
-    color:        '#8B949E',
-    marginTop:    '1.2rem',
-    overflowX:    'auto',
-    whiteSpace:   'pre',
-    fontFamily:   "'JetBrains Mono', monospace",
-    lineHeight:   1.7,
+  projectCard: {
+    display:        'block',
+    background:     'var(--bg)',
+    border:         '1px solid var(--bg3)',
+    borderRadius:   '4px',
+    padding:        '1.2rem 1.4rem',
+    marginTop:      '1.2rem',
+    textDecoration: 'none',
+    transition:     'border-color 0.2s',
+    cursor:         'pointer',
   } as React.CSSProperties,
 
-  kw: { color: '#FF7B72' } as React.CSSProperties,
-  ty: { color: '#79C0FF' } as React.CSSProperties,
-  fn: { color: '#D2A8FF' } as React.CSSProperties,
-  st: { color: '#A5D6FF' } as React.CSSProperties,
-  co: { color: '#8B949E', fontStyle: 'italic' } as React.CSSProperties,
+  projectLabel: {
+    fontSize:      '0.6rem',
+    letterSpacing: '0.14em',
+    textTransform: 'uppercase',
+    color:         'var(--rust)',
+    marginBottom:  '0.4rem',
+  } as React.CSSProperties,
+
+  projectName: {
+    fontFamily: "'Syne', sans-serif",
+    fontWeight: 700,
+    fontSize:   '1rem',
+    color:      'var(--text)',
+  } as React.CSSProperties,
+
+  projectDesc: {
+    fontSize:   '0.78rem',
+    color:      'var(--muted)',
+    lineHeight: 1.6,
+    marginTop:  '0.4rem',
+  } as React.CSSProperties,
+
+  projectLink: {
+    fontSize:   '0.75rem',
+    color:      'var(--rust)',
+    marginTop:  '0.8rem',
+  } as React.CSSProperties,
 } as const;
