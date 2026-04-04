@@ -6,7 +6,7 @@ export function GithubNoticeBanner() {
   if (dismissed) return null;
 
   return (
-    <div style={styles.banner}>
+    <div className="github-notice-banner" style={styles.banner}>
       <span style={styles.icon}>ℹ</span>
       <span style={styles.text}>
         This site is hosted on a secondary GitHub account — all project links point to my primary account.

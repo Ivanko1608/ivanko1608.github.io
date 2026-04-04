@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { hero } from '../data';
 import { useMediaQuery } from '../hooks/useMediaQuery';
+import { generatePdf } from '../lib/generatePdf';
 
 const NAV_LINKS = [
   { href: '#about',      label: 'About'      },
@@ -63,9 +64,14 @@ export function Navbar({ onBack }: NavbarProps) {
             {menuOpen ? '✕' : '☰'}
           </button>
         ) : (
-          <a href={`mailto:${hero.ctaEmail}`} style={styles.hireCta}>
-            Hire me →
-          </a>
+          <div style={{ display: 'flex', gap: '0.6rem', alignItems: 'center' }}>
+            <button style={styles.pdfBtn} onClick={() => generatePdf()}>
+              ↓ PDF
+            </button>
+            <a href={`mailto:${hero.ctaEmail}`} style={styles.hireCta}>
+              Hire me →
+            </a>
+          </div>
         )}
       </nav>
 
@@ -82,6 +88,12 @@ export function Navbar({ onBack }: NavbarProps) {
               {label}
             </a>
           ))}
+          <button
+            style={styles.drawerPdf}
+            onClick={() => { closeMenu(); generatePdf(); }}
+          >
+            ↓ Download PDF
+          </button>
           <a
             href={`mailto:${hero.ctaEmail}`}
             style={styles.drawerCta}
@@ -146,6 +158,21 @@ const styles = {
     transition:     'color 0.2s',
   } as React.CSSProperties,
 
+  pdfBtn: {
+    display:        'inline-flex',
+    alignItems:     'center',
+    padding:        '0.45rem 0.8rem',
+    fontFamily:     "'JetBrains Mono', monospace",
+    fontSize:       '0.72rem',
+    letterSpacing:  '0.06em',
+    borderRadius:   '3px',
+    background:     'transparent',
+    color:          'var(--muted)',
+    border:         '1px solid var(--bg3)',
+    cursor:         'pointer',
+    transition:     'color 0.2s, border-color 0.2s',
+  } as React.CSSProperties,
+
   hireCta: {
     display:        'inline-flex',
     alignItems:     'center',
@@ -193,6 +220,22 @@ const styles = {
     textTransform:  'uppercase',
     padding:        '0.75rem 0',
     borderBottom:   '1px solid var(--line)',
+  } as React.CSSProperties,
+
+  drawerPdf: {
+    display:        'inline-flex',
+    alignItems:     'center',
+    justifyContent: 'center',
+    padding:        '0.65rem 1.2rem',
+    fontFamily:     "'JetBrains Mono', monospace",
+    fontSize:       '0.8rem',
+    letterSpacing:  '0.06em',
+    borderRadius:   '3px',
+    background:     'transparent',
+    color:          'var(--muted)',
+    border:         '1px solid var(--bg3)',
+    cursor:         'pointer',
+    marginTop:      '1rem',
   } as React.CSSProperties,
 
   drawerCta: {

@@ -166,7 +166,7 @@ export const experience: ExperienceItem[] = [
     ],
   },
   {
-    period: 'Jan 2022 — Oct 2022 · 10 mo',
+    period: 'Jan 2022 — Dec 2022 · 12 mo',
     title: 'Node.js Software Engineer',
     company: 'LANIT · EdTech Platform',
     body: 'Backend dev on an EdTech platform, international team. API design and code review.',
@@ -185,7 +185,7 @@ export const experience: ExperienceItem[] = [
     period: 'Dec 2018 — Nov 2021 · 3 yr',
     title: 'Freelance Fullstack Developer',
     company: 'Independent · Moscow',
-    body: 'Freelance web and mobile backend development — hundreds of projects across multiple languages and stacks.',
+    body: 'Freelance web and mobile development — hundreds of projects, multiple stacks.',
     bullets: [],
     tags: [
       { label: 'Node.js', variant: 'node' },
@@ -318,7 +318,7 @@ export const contact = {
 // ── Footer ────────────────────────────────────────────────────────────────────
 
 export const footer = {
-  copyright: '© 2025 Ivan Kramarenko',
+  copyright: '© 2026 Ivan Kramarenko',
   tagline: '// designed & built with React, Tailwind, and a lot of TypeScript',
   location: 'Mallorca · Remote',
 };

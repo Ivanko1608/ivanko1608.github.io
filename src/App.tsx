@@ -32,7 +32,7 @@ function HrView({ onBack }: { onBack: () => void }) {
 
   return (
     <>
-      <div ref={headerRef} style={{ position: 'fixed', top: 0, left: 0, right: 0, zIndex: 100 }}>
+      <div ref={headerRef} data-header style={{ position: 'fixed', top: 0, left: 0, right: 0, zIndex: 100 }}>
         <Navbar onBack={onBack} />
         <GithubNoticeBanner />
       </div>
