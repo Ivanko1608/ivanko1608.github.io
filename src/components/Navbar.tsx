@@ -4,12 +4,16 @@ import { useMediaQuery } from '../hooks/useMediaQuery';
 import { generatePdf } from '../lib/generatePdf';
 
 const NAV_LINKS = [
-  { href: '#about',      label: 'About'      },
-  { href: '#experience', label: 'Experience' },
-  { href: '#skills',     label: 'Skills'     },
-  { href: '#security',   label: 'Security'   },
-  { href: '#contact',    label: 'Contact'    },
+  { target: 'about',      label: 'About'      },
+  { target: 'experience', label: 'Experience' },
+  { target: 'skills',     label: 'Skills'     },
+  { target: 'security',   label: 'Security'   },
+  { target: 'contact',    label: 'Contact'    },
 ];
+
+function scrollTo(id: string) {
+  document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+}
 
 interface NavbarProps {
   onBack?: () => void;
@@ -31,24 +35,24 @@ export function Navbar({ onBack }: NavbarProps) {
             ← back
           </button>
         ) : (
-          <a href="#hero" style={styles.logo} onClick={closeMenu}>
+          <button style={{ ...styles.logo, background: 'none', border: 'none', cursor: 'pointer', padding: 0 }} onClick={() => { closeMenu(); scrollTo('hero'); }}>
             {first}<span style={styles.logoDot}>.</span>{rest.join(' ')}
-          </a>
+          </button>
         )}
 
         {/* Desktop links */}
         {!isMobile && (
           <ul style={styles.links}>
-            {NAV_LINKS.map(({ href, label }) => (
-              <li key={href}>
-                <a
-                  href={href}
+            {NAV_LINKS.map(({ target, label }) => (
+              <li key={target}>
+                <button
                   style={styles.link}
+                  onClick={() => scrollTo(target)}
                   onMouseEnter={e => (e.currentTarget.style.color = 'var(--rust)')}
                   onMouseLeave={e => (e.currentTarget.style.color = 'var(--muted)')}
                 >
                   {label}
-                </a>
+                </button>
               </li>
             ))}
           </ul>
@@ -78,15 +82,14 @@ export function Navbar({ onBack }: NavbarProps) {
       {/* Mobile drawer */}
       {isMobile && menuOpen && (
         <div style={styles.drawer}>
-          {NAV_LINKS.map(({ href, label }) => (
-            <a
-              key={href}
-              href={href}
+          {NAV_LINKS.map(({ target, label }) => (
+            <button
+              key={target}
               style={styles.drawerLink}
-              onClick={closeMenu}
+              onClick={() => { closeMenu(); scrollTo(target); }}
             >
               {label}
-            </a>
+            </button>
           ))}
           <button
             style={styles.drawerPdf}
@@ -150,8 +153,12 @@ const styles = {
   } as React.CSSProperties,
 
   link: {
+    background:     'none',
+    border:         'none',
+    cursor:         'pointer',
+    padding:        0,
     color:          'var(--muted)',
-    textDecoration: 'none',
+    fontFamily:     "'JetBrains Mono', monospace",
     fontSize:       '0.78rem',
     letterSpacing:  '0.12em',
     textTransform:  'uppercase',
@@ -213,8 +220,12 @@ const styles = {
   } as React.CSSProperties,
 
   drawerLink: {
+    background:     'none',
+    border:         'none',
+    cursor:         'pointer',
+    textAlign:      'left',
     color:          'var(--muted)',
-    textDecoration: 'none',
+    fontFamily:     "'JetBrains Mono', monospace",
     fontSize:       '0.9rem',
     letterSpacing:  '0.1em',
     textTransform:  'uppercase',
