@@ -3,6 +3,7 @@ import { useScrollReveal } from './hooks/useScrollReveal';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
 import { About } from './components/About';
+import { Series } from './components/Series';
 import { Experience } from './components/Experience';
 import { Skills } from './components/Skills';
 import { Security } from './components/Security';
@@ -38,6 +39,7 @@ function HrView({ onBack }: { onBack: () => void }) {
       </div>
       <Hero />
       <About />
+      <Series />
       <Experience />
       <Skills />
       <Security />

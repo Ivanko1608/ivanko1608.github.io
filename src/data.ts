@@ -54,8 +54,29 @@ export interface BlogPost {
 
 export interface ContactLink {
   href: string;
-  icon: 'email' | 'github' | 'globe' | 'phone';
+  icon: 'email' | 'github' | 'globe' | 'phone' | 'youtube';
   label: string;
+}
+
+export interface Episode {
+  number: number;
+  title: string;
+  runtime?: string;       // e.g. "4:50:00" — omit for unreleased
+  url?: string;            // YouTube watch URL — omit for unreleased
+  status: 'live' | 'coming' | 'wip';
+  date?: string;           // e.g. "Mar 2026"
+}
+
+export interface Series {
+  title: string;
+  blurb: string;
+  totalRuntime: string;     // e.g. "4h45m so far"
+  status: string;            // e.g. "ongoing"
+  playlistUrl: string;
+  repoUrl?: string;
+  channelUrl: string;
+  episodes: Episode[];
+  roadmap?: string[];       // unscoped future topics
 }
 
 // ── Hero ──────────────────────────────────────────────────────────────────────
@@ -63,17 +84,20 @@ export interface ContactLink {
 export const hero = {
   name: 'Ivan Kramarenko',
   tagline: 'Available for EU remote roles',
-  subtitle: 'Backend Engineer & Team Lead. High-throughput systems, low-level curiosity.',
+  subtitle: 'Backend engineer & team lead. Long-form Rust on YouTube as Compiles Eventually.',
   stack: 'Node.js · Go · Rust',
-  stackNote: '— moving deeper into systems programming with Rust.',
+  stackNote: '— going systems-deep on stream.',
+  currently: 'Freedom-TLS series live · ep 1 (4h45m) shipped, ep 2 in progress',
+  channelName: 'Compiles Eventually',
   ctaEmail: 'cv.reboot220@aleeas.com',
   githubUrl: 'https://github.com/ivankram',
   blogUrl: 'https://ivankram.github.io/',
+  youtubeUrl: 'https://www.youtube.com/channel/UCXXd3jOjBp-SDsRDbMHwmJg',
 };
 
 export const stats: Stat[] = [
   { value: '7+', label: 'Years experience' },
-  { value: 'Top 10', label: 'Standoff 15 CTF' },
+  { value: '9th', label: 'Standoff 15 CTF' },
   { value: '16×', label: 'Faster deploys shipped' },
   { value: '3', label: 'Languages spoken' },
 ];
@@ -302,6 +326,40 @@ export const security = {
   ] satisfies BlogPost[],
 };
 
+// ── Series (long-form video content) ──────────────────────────────────────────
+
+export const series: Series = {
+  title: 'Freedom-TLS — building a VPN in Rust (sort of)',
+  blurb: "Set out to build a VPN from scratch in Rust with no networking background. Eight hours later: a working TLS-encrypted SOCKS5 tunnel. Not quite a VPN. The messy version, wrong turns kept in.",
+  totalRuntime: '4h45m so far',
+  status: 'ongoing',
+  // No standalone playlist URL yet; channel link doubles as "all episodes" target
+  playlistUrl: 'https://www.youtube.com/channel/UCXXd3jOjBp-SDsRDbMHwmJg',
+  repoUrl: 'https://github.com/Ivanko1608/freedom-tls',
+  channelUrl: 'https://www.youtube.com/channel/UCXXd3jOjBp-SDsRDbMHwmJg',
+  episodes: [
+    {
+      number: 1,
+      title: 'TLS + SOCKS5 tunnel from scratch (8 hours of mistakes)',
+      runtime: '4:50:00',
+      url: 'https://youtu.be/OoD57Bts04U',
+      status: 'live',
+    },
+    {
+      number: 2,
+      title: 'Custom wire protocol with postcard',
+      status: 'wip',
+    },
+  ],
+  roadmap: [
+    'Client-side TUN device (transparent traffic capture)',
+    'UDP support',
+    'DNS leak prevention',
+    'Real error handling',
+    'Config file instead of hardcoded values',
+  ],
+};
+
 // ── Contact ───────────────────────────────────────────────────────────────────
 
 export const contact = {
@@ -312,6 +370,7 @@ export const contact = {
     { href: 'mailto:cv.reboot220@aleeas.com', icon: 'email', label: 'cv.reboot220@aleeas.com' },
     { href: 'https://github.com/ivankram', icon: 'github', label: 'github.com/ivankram' },
     { href: 'https://ivankram.github.io/', icon: 'globe', label: 'HashPigz security blog' },
+    { href: 'https://www.youtube.com/channel/UCXXd3jOjBp-SDsRDbMHwmJg', icon: 'youtube', label: 'YouTube' },
   ] satisfies ContactLink[],
 };
 

@@ -40,6 +40,12 @@ export function Hero() {
           {hero.stackNote}
         </p>
 
+        {hero.currently && (
+          <p style={styles.currently}>
+            <span style={{ color: 'var(--rust)' }}>▸</span> Currently: {hero.currently}
+          </p>
+        )}
+
         {/* CTA buttons */}
         <div style={{
           ...styles.cta,
@@ -170,6 +176,15 @@ const styles = {
     marginTop:  '1.4rem',
     maxWidth:   '560px',
     animation:  'fadeUp 0.7s 0.2s ease both',
+  } as React.CSSProperties,
+
+  currently: {
+    fontFamily: "'JetBrains Mono', monospace",
+    fontSize:   '0.78rem',
+    color:      'var(--text)',
+    marginTop:  '0.9rem',
+    maxWidth:   '560px',
+    animation:  'fadeUp 0.7s 0.25s ease both',
   } as React.CSSProperties,
 
   cta: {

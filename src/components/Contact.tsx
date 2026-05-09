@@ -5,12 +5,14 @@ import { EmailIcon } from './icons/EmailIcon';
 import { GitHubIcon } from './icons/GitHubIcon';
 import { GlobeIcon }  from './icons/GlobeIcon';
 import { PhoneIcon }  from './icons/PhoneIcon';
+import { YouTubeIcon } from './icons/YouTubeIcon';
 
 const ICON_MAP = {
-  email:  EmailIcon,
-  github: GitHubIcon,
-  globe:  GlobeIcon,
-  phone:  PhoneIcon,
+  email:   EmailIcon,
+  github:  GitHubIcon,
+  globe:   GlobeIcon,
+  phone:   PhoneIcon,
+  youtube: YouTubeIcon,
 } as const;
 
 function ContactButton({ link }: { link: ContactLink }) {

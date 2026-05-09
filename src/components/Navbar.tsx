@@ -5,6 +5,7 @@ import { generatePdf } from '../lib/generatePdf';
 
 const NAV_LINKS = [
   { target: 'about',      label: 'About'      },
+  { target: 'series',     label: 'Series'     },
   { target: 'experience', label: 'Experience' },
   { target: 'skills',     label: 'Skills'     },
   { target: 'security',   label: 'Security'   },
