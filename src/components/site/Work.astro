@@ -1,0 +1,36 @@
+---
+import { caseStudies } from '../../data';
+import { inlineMd } from '../../lib/inline-md';
+import Tags from './Tags.astro';
+---
+
+<section class="section" id="work">
+  <div class="wrap">
+    <div class="section-label">// selected work</div>
+    <h2>What I've built</h2>
+
+    <div class="cases">
+      {caseStudies.map((c) => (
+        <article class="case">
+          <div>
+            <div class="case-kicker">{c.kicker}</div>
+            <h3>{c.title}</h3>
+            <p class="case-problem">{c.problem}</p>
+            <Tags tags={c.tags} />
+          </div>
+          <div>
+            <ul class="case-list">
+              {c.did.map((d) => <li set:html={inlineMd(d)} />)}
+            </ul>
+            <p class="case-result">{c.result}</p>
+            {c.links && (
+              <div class="case-links">
+                {c.links.map((l) => <a href={l.href} target="_blank" rel="noreferrer">{l.label} →</a>)}
+              </div>
+            )}
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>

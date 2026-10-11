@@ -1,8 +1,8 @@
-import { describe, it, expect, beforeEach, vi } from 'vitest';
+import { describe, it, expect, beforeEach } from 'vitest';
 import {
   mkLine, blank, hr, resetId,
   getSuggestions, processCommand,
-  cmdWhoami, cmdExperience, cmdSkills, cmdContact, cmdNeofetch, cmdGitBlame, cmdHelp,
+  cmdWhoami, cmdNeofetch, cmdGitBlame, cmdHelp,
   type CmdCallbacks,
 } from './terminal';
 

@@ -8,19 +8,25 @@ import {
 type Phase = 'grub' | 'boot' | 'shell';
 
 interface TerminalProps {
-  onBack: () => void;
+  /** Called on `exit` / back. Defaults to navigating to `backHref`. */
+  onBack?: () => void;
+  backHref?: string;
 }
 
 // ── Component ─────────────────────────────────────────────────────────────────
 
-export function Terminal({ onBack }: TerminalProps) {
+export function Terminal({ onBack: onBackProp, backHref = '/' }: TerminalProps) {
+  const onBack = useCallback(
+    () => (onBackProp ? onBackProp() : window.location.assign(backHref)),
+    [onBackProp, backHref],
+  );
   const [phase,      setPhase]      = useState<Phase>('grub');
   const [countdown,  setCountdown]  = useState(GRUB_COUNTDOWN_START);
   const [bootLines,  setBootLines]  = useState<string[]>([]);
   const [history,    setHistory]    = useState<OutputLine[]>([]);
   const [input,      setInput]      = useState('');
   const [cmdHistory, setCmdHistory] = useState<string[]>([]);
-  const [historyIdx, setHistoryIdx] = useState(-1);
+  const [, setHistoryIdx] = useState(-1);
   const [showSl,     setShowSl]     = useState(false);
 
   const inputRef = useRef<HTMLInputElement>(null);
@@ -91,6 +97,7 @@ export function Terminal({ onBack }: TerminalProps) {
       onExit:  onBack,
       onSl:    handleSl,
       onClear: () => { cleared = true; setHistory([]); },
+      onOpen:  (url) => window.open(url, '_blank', 'noopener'),
     };
     const output = processCommand(raw, cbs);
     if (raw.trim()) setCmdHistory(prev => [raw, ...prev]);
@@ -225,7 +232,7 @@ export function Terminal({ onBack }: TerminalProps) {
       {/* ── Shell ────────────────────────────────────────────────────────── */}
       {phase === 'shell' && (
         <div style={styles.shell}>
-          <button style={styles.backBtn} onClick={onBack}>← back to landing</button>
+          <button style={styles.backBtn} onClick={onBack}>← back to site</button>
 
           {history.map(l => (
             <div

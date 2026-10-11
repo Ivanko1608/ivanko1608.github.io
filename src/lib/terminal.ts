@@ -15,6 +15,7 @@ export interface CmdCallbacks {
   onExit: () => void;
   onSl: () => void;
   onClear: () => void;
+  onOpen?: (url: string) => void;
 }
 
 // ── IDs ───────────────────────────────────────────────────────────────────────
@@ -28,7 +29,7 @@ export const hr = (label = ''): OutputLine =>
 
 // ── Autocomplete ──────────────────────────────────────────────────────────────
 
-export const COMPLETABLE = ['help', 'whoami', 'experience', 'skills', 'contact', 'ls', 'cat', 'clear', 'exit', 'neofetch', 'git', 'sl', 'sudo'];
+export const COMPLETABLE = ['help', 'whoami', 'experience', 'skills', 'contact', 'blog', 'cv', 'ls', 'cat', 'clear', 'exit', 'neofetch', 'git', 'sl', 'sudo'];
 export const FILES       = ['about.txt', 'experience.toml', 'skills.rs', 'contact.md', 'readme.md'];
 
 export function getSuggestions(input: string): string[] {
@@ -202,10 +203,12 @@ export function cmdHelp(): OutputLine[] {
     cmdLine('  experience    work history',     'experience'),
     cmdLine('  skills        tech stack',       'skills'),
     cmdLine('  contact       get in touch',     'contact'),
+    cmdLine('  blog          open the blog',     'blog'),
+    cmdLine('  cv            download CV (PDF)', 'cv'),
     cmdLine('  ls            list files',       'ls'),
     mkLine( '  cat <file>    read a file'),
     cmdLine('  clear         clear terminal',   'clear'),
-    cmdLine('  exit          back to landing',  'exit'),
+    cmdLine('  exit          back to the site', 'exit'),
     blank(),
     cmdLine('  neofetch      system information', 'neofetch', 'dim'),
     cmdLine('  git blame     who did this?',      'git blame', 'dim'),
@@ -228,6 +231,12 @@ export function processCommand(raw: string, cb: CmdCallbacks): OutputLine[] {
     case 'skills':     return cmdSkills();
     case 'contact':    return cmdContact();
     case 'neofetch':   return cmdNeofetch();
+    case 'blog':
+      cb.onOpen?.('/blog/');
+      return [mkLine('Opening /blog/ in a new tab...', 'success')];
+    case 'cv':
+      cb.onOpen?.(hero.cvUrl);
+      return [mkLine(`Opening ${hero.cvUrl} in a new tab...`, 'success')];
     case 'ls':
       return [mkLine('about.txt     experience.toml     skills.rs     contact.md     readme.md', 'muted')];
     case 'cat': {

@@ -1,0 +1,43 @@
+---
+import Base from '../layouts/Base.astro';
+import Hero from '../components/site/Hero.astro';
+import Work from '../components/site/Work.astro';
+import Experience from '../components/site/Experience.astro';
+import WhyRust from '../components/site/WhyRust.astro';
+import Skills from '../components/site/Skills.astro';
+import Hire from '../components/site/Hire.astro';
+import { hero, security } from '../data';
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: hero.name,
+  jobTitle: hero.jobTitle,
+  url: Astro.site?.href,
+  image: new URL('/og.png', Astro.site).href,
+  email: `mailto:${hero.ctaEmail}`,
+  address: { '@type': 'PostalAddress', addressRegion: 'Mallorca', addressCountry: 'ES' },
+  knowsLanguage: ['en', 'es', 'ru'],
+  knowsAbout: ['Rust', 'Go', 'Node.js', 'TypeScript', 'Backend engineering', 'Distributed systems', 'Networking', 'Offensive security'],
+  sameAs: [hero.githubUrl, hero.githubOldUrl, hero.youtubeUrl, security.blogUrl],
+};
+---
+
+<Base
+  title="Ivan Kramarenko — Senior Backend Engineer (Rust, Go, Node.js)"
+  description="Senior backend engineer & team lead, 7+ years. Rust in production, Go on 5G Core, Node.js at scale. Open to remote EU roles. CV, case studies and contact."
+  type="profile"
+  jsonLd={jsonLd}
+>
+  <script is:inline slot="head">
+    // Old hash routes from the single-page version of the site
+    if (location.hash === '#terminal') location.replace('/terminal/');
+    else if (location.hash === '#resume') history.replaceState(null, '', '/');
+  </script>
+  <Hero />
+  <Work />
+  <Experience />
+  <WhyRust />
+  <Skills />
+  <Hire />
+</Base>

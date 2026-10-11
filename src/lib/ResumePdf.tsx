@@ -1,6 +1,6 @@
 import {
   Document, Page, View, Text, Link, Font,
-  pdf, StyleSheet,
+  StyleSheet,
 } from '@react-pdf/renderer';
 import {
   hero, stats, about, experience, skillCategories, security, contact,
@@ -103,7 +103,7 @@ function stripEmoji(t: string) {
 }
 
 // ── Document ─────────────────────────────────────────────────────────────────
-function ResumeDocument() {
+export function ResumeDocument() {
   return (
     <Document title={`${hero.name} — Resume`} author={hero.name}>
       <Page size="A4" style={s.page} wrap>
@@ -111,8 +111,8 @@ function ResumeDocument() {
         {/* ── Header ──────────────────────────────────────────────── */}
         <Text style={s.name}>{hero.name}</Text>
         <View style={s.accentBar} />
-        <Text style={s.subtitle}>{strip(hero.subtitle)}</Text>
-        <Text style={s.stack}>{hero.stack}  {hero.stackNote}</Text>
+        <Text style={s.subtitle}>{hero.jobTitle} · {hero.stack}</Text>
+        <Text style={s.stack}>{strip(hero.subtitle)}</Text>
 
         <View style={s.contactRow}>
           <Text style={s.contactItem}>{hero.ctaEmail}</Text>
@@ -122,10 +122,9 @@ function ResumeDocument() {
 
         <View style={{ flexDirection: 'row', gap: 4, marginBottom: 14 }}>
           <Link src={hero.githubUrl} style={s.contactItem}>{hero.githubUrl.replace('https://', '')}</Link>
-          <Text style={{ fontSize: 7.5, color: C.light }}>(legacy)</Text>
           <Text style={s.contactSep}>|</Text>
-          <Link src="https://github.com/Ivanko1608" style={s.contactItem}>github.com/Ivanko1608</Link>
-          <Text style={{ fontSize: 7.5, color: C.light }}>(Rust & current work)</Text>
+          <Link src={hero.githubOldUrl} style={s.contactItem}>{hero.githubOldUrl.replace('https://', '')}</Link>
+          <Text style={{ fontSize: 7.5, color: C.light }}>(older projects)</Text>
         </View>
 
         {/* ── Stats ───────────────────────────────────────────────── */}
@@ -215,13 +214,13 @@ function ResumeDocument() {
         {/* ── Footer CTA ──────────────────────────────────────────── */}
         <View style={s.footerWrap} wrap={false}>
           <View style={s.ctaBox}>
-            <Text style={s.ctaTitle}>This PDF is a summary. The full version is interactive.</Text>
+            <Text style={s.ctaTitle}>This PDF is a summary. Case studies, the Rust video series and the blog are online.</Text>
             <View style={{ flexDirection: 'row', gap: 4, alignItems: 'center', marginTop: 4 }}>
               <Link src="https://ivanko1608.github.io" style={s.footerLink}>
                 ivanko1608.github.io
               </Link>
               <Text style={{ fontSize: 8, color: C.gray }}>
-                — detailed project cards, a working terminal emulator, and security blog.
+                — plus a terminal version for developers.
               </Text>
             </View>
           </View>
@@ -233,15 +232,4 @@ function ResumeDocument() {
       </Page>
     </Document>
   );
-}
-
-// ── Render & download ────────────────────────────────────────────────────────
-export async function renderResumePdf() {
-  const blob = await pdf(<ResumeDocument />).toBlob();
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url;
-  a.download = 'Ivan_Kramarenko_Resume.pdf';
-  a.click();
-  URL.revokeObjectURL(url);
 }

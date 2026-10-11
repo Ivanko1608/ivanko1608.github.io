@@ -1,0 +1,33 @@
+---
+import { experience } from '../../data';
+import { inlineMd } from '../../lib/inline-md';
+import Tags from './Tags.astro';
+---
+
+<section class="section" id="experience">
+  <div class="wrap">
+    <div class="section-label">// career</div>
+    <h2>Experience</h2>
+
+    <div class="timeline">
+      {experience.map((job) => (
+        <details class:list={['job', { current: job.current }]} open={job.current}>
+          <summary>
+            <div class="job-head">
+              <span class="job-title">{job.title}</span>
+              <span class="job-period">{job.period}</span>
+            </div>
+            <div class="job-company">{job.company}</div>
+          </summary>
+          <div class="job-body">
+            <p>{job.body}</p>
+            {job.bullets.length > 0 && (
+              <ul>{job.bullets.map((b) => <li set:html={inlineMd(b)} />)}</ul>
+            )}
+            <Tags tags={job.tags} />
+          </div>
+        </details>
+      ))}
+    </div>
+  </div>
+</section>
