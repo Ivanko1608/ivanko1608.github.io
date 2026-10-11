@@ -1,0 +1,20 @@
+---
+import { skillCategories } from '../../data';
+import Tags from './Tags.astro';
+---
+
+<section class="section" id="skills">
+  <div class="wrap">
+    <div class="section-label">// technical stack</div>
+    <h2>Skills</h2>
+
+    <div class="skills">
+      {skillCategories.map((cat) => (
+        <div class:list={['skill-card', { featured: cat.featured }]}>
+          <h3>{cat.title}</h3>
+          <Tags tags={cat.pills} />
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

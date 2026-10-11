@@ -1,0 +1,33 @@
+---
+import { hero, stats } from '../../data';
+import { GitHubIcon } from '../icons/GitHubIcon';
+import { YouTubeIcon } from '../icons/YouTubeIcon';
+
+const [first, last] = hero.name.split(' ');
+const mailto = `mailto:${hero.ctaEmail}?subject=${encodeURIComponent(hero.ctaSubject)}`;
+---
+
+<section class="hero" id="top">
+  <div class="wrap">
+    <div class="pill">{hero.tagline}</div>
+    <h1>{first} <span>{last}</span></h1>
+    <p class="hero-headline">{hero.headline}</p>
+    <p class="hero-sub">{hero.subtitle}</p>
+
+    <div class="hero-cta">
+      <a class="btn btn-primary" href={mailto}>Email me →</a>
+      <a class="btn btn-ghost" href={hero.cvUrl}>Download CV (PDF)</a>
+      <a class="btn btn-ghost" href={hero.githubUrl} target="_blank" rel="noreferrer"><GitHubIcon size={14} /> GitHub</a>
+      <a class="btn btn-ghost" href="/content/"><YouTubeIcon size={14} /> Watch me code</a>
+    </div>
+
+    <dl class="proof">
+      {stats.map((s) => (
+        <div>
+          <dt class="proof-value">{s.value}</dt>
+          <dd class="proof-label">{s.label}</dd>
+        </div>
+      ))}
+    </dl>
+  </div>
+</section>

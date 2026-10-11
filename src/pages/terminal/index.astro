@@ -1,0 +1,15 @@
+---
+import Base from '../../layouts/Base.astro';
+import { Terminal } from '../../components/Terminal';
+---
+
+<Base
+  title="Terminal — Ivan Kramarenko"
+  description="The developer version of Ivan Kramarenko's portfolio: boot a fake Linux, then poke around with whoami, cat skills.rs, git blame and friends."
+  bare
+>
+  <Terminal client:only="react" backHref="/" />
+  <noscript>
+    <p style="padding:2rem">The terminal needs JavaScript. <a href="/">Back to the site</a>.</p>
+  </noscript>
+</Base>

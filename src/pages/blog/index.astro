@@ -1,0 +1,31 @@
+---
+import Base from '../../layouts/Base.astro';
+import { getPosts, postUrl, fmtDate } from '../../posts';
+
+const posts = await getPosts();
+---
+
+<Base title="Blog — Ivan Kramarenko" description="Notes on backend engineering and Rust by Ivan Kramarenko: production lessons, systems deep-dives and the Freedom-TLS build.">
+  <div class="article">
+    <div class="section-label">// blog</div>
+    <h1>Writing</h1>
+    <p class="muted" style="margin-bottom:2.5rem">Notes on backend engineering and Rust. Security writeups live on <a href="https://ivankram.github.io/">HashPigz</a>.</p>
+
+    {posts.length === 0 && <p class="muted">No posts yet. <a href="/rss.xml">RSS</a></p>}
+
+    <ul class="post-list">
+      {posts.map((post) => (
+        <li>
+          <a href={postUrl(post.id)}>
+            <time datetime={post.data.date.toISOString()}>{fmtDate(post.data.date)}</time>
+            <span class="post-title">
+              {post.data.title}
+              {post.data.draft && <em class="draft">draft</em>}
+            </span>
+            <span class="post-desc">{post.data.description}</span>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
+</Base>

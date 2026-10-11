@@ -1,0 +1,36 @@
+---
+import { hero, lookingFor, contact } from '../../data';
+import { EmailIcon } from '../icons/EmailIcon';
+import { GitHubIcon } from '../icons/GitHubIcon';
+import { GlobeIcon } from '../icons/GlobeIcon';
+import { PhoneIcon } from '../icons/PhoneIcon';
+import { YouTubeIcon } from '../icons/YouTubeIcon';
+
+const ICONS = { email: EmailIcon, github: GitHubIcon, globe: GlobeIcon, phone: PhoneIcon, youtube: YouTubeIcon };
+const mailto = `mailto:${hero.ctaEmail}?subject=${encodeURIComponent(hero.ctaSubject)}`;
+---
+
+<section class="section" id="contact">
+  <div class="wrap">
+    <div class="hire">
+      <div>
+        <div class="section-label">// hiring?</div>
+        <h2>{lookingFor.heading}</h2>
+        <ul>{lookingFor.points.map((p) => <li>{p}</li>)}</ul>
+        <p class="muted">{lookingFor.languages}</p>
+      </div>
+      <div class="hire-actions">
+        <h2>{contact.heading}</h2>
+        <p class="muted">{contact.subtext}</p>
+        <a class="btn btn-primary" href={mailto}>Email {hero.ctaEmail}</a>
+        <a class="btn btn-ghost" href={hero.cvUrl}>Download CV (PDF)</a>
+        <div class="hire-links">
+          {contact.links.filter((l) => l.icon !== 'email').map((l) => {
+            const Icon = ICONS[l.icon];
+            return <a href={l.href} target="_blank" rel="noreferrer"><Icon size={13} /> {l.label}</a>;
+          })}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

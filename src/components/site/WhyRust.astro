@@ -1,0 +1,30 @@
+---
+import { about } from '../../data';
+---
+
+<section class="section" id="rust">
+  <div class="wrap">
+    <div class="section-label">// why rust</div>
+    <h2>Why Rust</h2>
+
+    <div class="rust-grid">
+      <div>
+        {about.rustCard.paragraphs.map((p) => <p>{p}</p>)}
+      </div>
+      <div class="card-stack">
+        <a class="card-link" href="https://github.com/Ivanko1608/freedom-tls" target="_blank" rel="noreferrer">
+          <div class="card-label">Open source · Rust</div>
+          <div class="card-title">freedom-tls</div>
+          <div class="card-desc">A VPN built live on YouTube: tokio, rustls, postcard, TUN.</div>
+          <div class="card-more">View on GitHub →</div>
+        </a>
+        <a class="card-link" href="https://github.com/Ivanko1608/diy-term" target="_blank" rel="noreferrer">
+          <div class="card-label">Open source · Rust</div>
+          <div class="card-title">diy-term</div>
+          <div class="card-desc">A shell built from scratch in Rust. Stdlib only, zero crates.</div>
+          <div class="card-more">View on GitHub →</div>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>

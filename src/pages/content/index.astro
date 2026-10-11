@@ -1,0 +1,92 @@
+---
+import Base from '../../layouts/Base.astro';
+import { series, security, hero } from '../../data';
+import { getPosts, postUrl, fmtDate } from '../../posts';
+import { YouTubeIcon } from '../../components/icons/YouTubeIcon';
+import { GitHubIcon } from '../../components/icons/GitHubIcon';
+
+const posts = (await getPosts()).slice(0, 5);
+---
+
+<Base
+  title="Rust, backend & security content — Ivan Kramarenko"
+  description="Long-form Rust on YouTube (building a VPN from scratch), engineering blog posts, and offensive security writeups by Ivan Kramarenko."
+>
+  <div class="wrap">
+    <header class="page-head">
+      <div class="section-label">// content</div>
+      <h1>Watch, read, break things</h1>
+      <p>Long-form Rust on YouTube as <strong>{hero.channelName}</strong>, engineering notes on the blog, and security writeups from CTFs and malware analysis.</p>
+    </header>
+
+    <section class="section" id="series">
+      <div class="section-label">// video series · {series.status}</div>
+      <h2>{series.title}</h2>
+      <p class="section-lede">{series.blurb} <span class="muted">{series.totalRuntime}.</span></p>
+
+      <div class="episodes">
+        {series.episodes.map((ep) => {
+          const live = ep.status === 'live' && ep.url;
+          const Tag = live ? 'a' : 'div';
+          return (
+            <Tag class="episode" href={live ? ep.url : undefined} target={live ? '_blank' : undefined} rel={live ? 'noreferrer' : undefined}>
+              <span class="episode-num">EP {String(ep.number).padStart(2, '0')}</span>
+              <span class="episode-title">{ep.title}</span>
+              <span class="episode-meta">{live ? `▶ ${ep.runtime}` : ep.status === 'wip' ? 'in progress' : 'coming'}</span>
+            </Tag>
+          );
+        })}
+      </div>
+
+      {series.roadmap && series.roadmap.length > 0 && (
+        <div class="roadmap">
+          <span class="muted">// next up</span>
+          <ul>{series.roadmap.map((r) => <li>{r}</li>)}</ul>
+        </div>
+      )}
+
+      <div class="row-actions">
+        <a class="btn btn-primary" href={series.playlistUrl} target="_blank" rel="noreferrer"><YouTubeIcon size={14} /> Watch the playlist</a>
+        {series.repoUrl && <a class="btn btn-ghost" href={series.repoUrl} target="_blank" rel="noreferrer"><GitHubIcon size={14} /> Companion repo</a>}
+        <a class="btn btn-ghost" href={series.channelUrl} target="_blank" rel="noreferrer">Subscribe →</a>
+      </div>
+    </section>
+
+    <section class="section" id="blog">
+      <div class="section-label">// blog</div>
+      <h2>Latest posts</h2>
+      {posts.length === 0 ? (
+        <p class="muted">First posts are on the way. <a href="/rss.xml">Grab the RSS feed</a> to catch them.</p>
+      ) : (
+        <ul class="post-list">
+          {posts.map((post) => (
+            <li>
+              <a href={postUrl(post.id)}>
+                <time datetime={post.data.date.toISOString()}>{fmtDate(post.data.date)}</time>
+                <span class="post-title">{post.data.title}</span>
+                <span class="post-desc">{post.data.description}</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      )}
+      <p style="margin-top:1.5rem"><a class="btn btn-ghost" href="/blog/">All posts →</a></p>
+    </section>
+
+    <section class="section" id="security">
+      <div class="section-label">// hashpigz · security research</div>
+      <h2>Security writeups</h2>
+      <div class="badge">{security.ctfBadge}</div>
+      <div class="writeups">
+        {security.posts.map((p) => (
+          <a class="card-link" href={p.url} target="_blank" rel="noreferrer">
+            <div class="card-label">{p.tag}</div>
+            <div class="card-title">{p.title}</div>
+            <div class="card-desc">{p.date}</div>
+          </a>
+        ))}
+      </div>
+      <p style="margin-top:1.5rem"><a class="btn btn-ghost" href={security.blogUrl} target="_blank" rel="noreferrer">More on HashPigz →</a></p>
+    </section>
+  </div>
+</Base>

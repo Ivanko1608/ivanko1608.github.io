@@ -83,24 +83,114 @@ export interface Series {
 
 export const hero = {
   name: 'Ivan Kramarenko',
-  tagline: 'Available for EU remote roles',
-  subtitle: 'Backend engineer & team lead. Long-form Rust on YouTube as Compiles Eventually.',
-  stack: 'Node.js · Go · Rust',
-  stackNote: '— going systems-deep on stream.',
+  jobTitle: 'Senior Backend Engineer & Team Lead',
+  tagline: 'Open to senior backend & Rust roles · EU remote · CET',
+  headline: 'Backends that stay up in production. In Rust, Go and Node.js.',
+  subtitle: 'Backend engineer & team lead, 7+ years. Rust on the performance-critical paths of a 1,000+ conversions/day platform, Go on 5G Core infrastructure, Node.js across fintech and insurance. Currently building a VPN in Rust on camera.',
+  stack: 'Rust · Go · Node.js',
+  stackNote: '',
   currently: 'Freedom-TLS series · 4 episodes, ~24h of Rust VPN building on YouTube',
   channelName: 'Compiles Eventually',
   ctaEmail: 'cv.reboot220@aleeas.com',
-  githubUrl: 'https://github.com/ivankram',
-  blogUrl: 'https://ivankram.github.io/',
+  ctaSubject: 'Hiring: backend role',
+  cvUrl: '/ivan-kramarenko-cv.pdf',
+  githubUrl: 'https://github.com/Ivanko1608',
+  githubOldUrl: 'https://github.com/ivankram',   // older projects only
+  blogUrl: 'https://ivankram.github.io/',          // HashPigz security blog
   youtubeUrl: 'https://www.youtube.com/channel/UCXXd3jOjBp-SDsRDbMHwmJg',
 };
 
+// Proof strip under the hero, also used in the CV PDF
 export const stats: Stat[] = [
-  { value: '7+', label: 'Years experience' },
-  { value: '9th', label: 'Standoff 15 CTF' },
-  { value: '16×', label: 'Faster deploys shipped' },
-  { value: '3', label: 'Languages spoken' },
+  { value: '7+',     label: 'Years in production backends' },
+  { value: '3h',     label: 'Deploy time, down from 2 days' },
+  { value: '1,000+', label: 'Conversions/day on a platform I built' },
+  { value: '9th',    label: 'Of 200+ teams at Standoff 15 CTF' },
 ];
+
+// ── Selected work (case-study cards) ──────────────────────────────────────────
+
+export interface CaseStudy {
+  kicker: string;     // e.g. "Boomerang Partners · 2021 — now"
+  title: string;
+  problem: string;
+  did: string[];      // what I did (use **bold** for emphasis)
+  result: string;
+  tags: Tag[];
+  links?: { href: string; label: string }[];
+}
+
+export const caseStudies: CaseStudy[] = [
+  {
+    kicker: 'Boomerang Partners · Team Lead · 2021 — now',
+    title: 'A CPA affiliate network backend, built from zero',
+    problem: 'A licensed affiliate network needed its whole backend: tracking, offers, payouts, and a team to run it.',
+    did: [
+      'Designed and built the backend from scratch',
+      'Put **Rust on the performance-critical paths**, moved the Express codebase to NestJS',
+      'Built the CI/CD pipeline; ran hiring, 1-on-1s, code review and postmortems for a 3–5 person team',
+    ],
+    result: '1,000+ conversions/day. Deploys went from 2 days to 3 hours.',
+    tags: [
+      { label: 'Rust', variant: 'rust' },
+      { label: 'NestJS', variant: 'node' },
+      { label: 'PostgreSQL', variant: 'default' },
+      { label: 'Kafka', variant: 'default' },
+      { label: 'Redis', variant: 'default' },
+      { label: 'AWS', variant: 'default' },
+    ],
+  },
+  {
+    kicker: 'YADRO · Senior Go Engineer · 2023 — 2024',
+    title: 'Bridging legacy 4G management to a 5G Core',
+    problem: 'A management console built for LTE/4G had to drive a new 5G Core, across a Go / C++ boundary.',
+    did: [
+      '**Sole author** of the Go microservice between the console and the 5G Core',
+      'Worked both sides of the Go + C++ integration with the legacy LTE/4G software',
+      'Introduced code generation from Protobuf and OpenAPI specs',
+    ],
+    result: 'Contracts generated from specs, so manual contract drift between services went away.',
+    tags: [
+      { label: 'Go', variant: 'go' },
+      { label: 'C++', variant: 'default' },
+      { label: 'Protobuf', variant: 'default' },
+      { label: 'OpenAPI', variant: 'default' },
+    ],
+  },
+  {
+    kicker: 'Freedom-TLS · open source · 2026',
+    title: 'A VPN in Rust, built on camera',
+    problem: 'Build a VPN from scratch with no networking background, and keep the wrong turns in.',
+    did: [
+      'Started as a TLS-encrypted SOCKS5 tunnel on **tokio + rustls**',
+      'Threw out six hours of protobuf for a custom **postcard** wire protocol',
+      'Ended up moving raw IP packets over a **TUN device**',
+    ],
+    result: '~24 hours of unedited Rust over 4 episodes. Code on GitHub.',
+    tags: [
+      { label: 'Rust', variant: 'rust' },
+      { label: 'tokio', variant: 'rust' },
+      { label: 'rustls', variant: 'rust' },
+      { label: 'Networking', variant: 'default' },
+    ],
+    links: [
+      { href: 'https://www.youtube.com/playlist?list=PL5KHCLK_1CdeKeiIv00NKXlORxW6qD8NN', label: 'Watch the series' },
+      { href: 'https://github.com/Ivanko1608/freedom-tls', label: 'Repo' },
+    ],
+  },
+];
+
+// ── Looking for (lets recruiters self-qualify) ────────────────────────────────
+
+export const lookingFor = {
+  heading: 'What I’m looking for',
+  points: [
+    'A product team running Rust in production, or adopting it',
+    'Senior backend or tech-lead roles',
+    'Remote, with CET/CEST overlap',
+  ],
+  languages: 'English C2 · Spanish C1 · Russian native',
+};
 
 // ── About ─────────────────────────────────────────────────────────────────────
 
@@ -119,7 +209,7 @@ export const about = {
     heading: '⚙ Why Rust, and why now',
     paragraphs: [
       "I like complex languages. Go is great but deliberately simple. C++ has the expressiveness I want but the tooling and safety story are rough. Rust gives me what C++ does, with memory safety, a real package manager, a compiler that actually helps, and a community I like being part of.",
-      "Looking for a team that already uses Rust in production or is adopting it. I want to write it professionally, not just on weekends.",
+      "I've shipped it on production hot paths and I'm building a VPN in it in public. Next I want a team where Rust is most of the job, not a slice of it.",
     ],
   },
 };
@@ -224,7 +314,7 @@ export const experience: ExperienceItem[] = [
 
 export const skillCategories: SkillCategory[] = [
   {
-    title: '🦀 Rust (actively developing)',
+    title: '🦀 Rust',
     featured: true,
     pills: [
       { label: 'Rust', variant: 'rust' },
@@ -382,11 +472,12 @@ export const series: Series = {
 
 export const contact = {
   heading: "Let's work together",
-  subtext: 'Open to remote roles. Especially interested in Rust.',
+  subtext: 'Email is fastest. I reply within a day or two.',
   euNote: '🌍 EU availability: C2 English · C1 Spanish · Open to CET/CEST timezones',
   links: [
     { href: 'mailto:cv.reboot220@aleeas.com', icon: 'email', label: 'cv.reboot220@aleeas.com' },
-    { href: 'https://github.com/ivankram', icon: 'github', label: 'github.com/ivankram' },
+    { href: 'https://github.com/Ivanko1608', icon: 'github', label: 'github.com/Ivanko1608' },
+    { href: 'https://github.com/ivankram', icon: 'github', label: 'github.com/ivankram (older projects)' },
     { href: 'https://ivankram.github.io/', icon: 'globe', label: 'HashPigz security blog' },
     { href: 'https://www.youtube.com/channel/UCXXd3jOjBp-SDsRDbMHwmJg', icon: 'youtube', label: 'YouTube' },
   ] satisfies ContactLink[],
@@ -396,6 +487,6 @@ export const contact = {
 
 export const footer = {
   copyright: '© 2026 Ivan Kramarenko',
-  tagline: '// designed & built with React, Tailwind, and a lot of TypeScript',
+  tagline: '// built with Astro, React and a lot of TypeScript',
   location: 'Mallorca · Remote',
 };

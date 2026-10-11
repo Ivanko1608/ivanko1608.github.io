@@ -1,0 +1,101 @@
+---
+import '../styles/global.css';
+import '../styles/site.css';
+import { hero, footer } from '../data';
+
+interface Props {
+  title: string;
+  description: string;
+  type?: 'website' | 'article' | 'profile';
+  jsonLd?: Record<string, unknown>;
+  /** Hide site nav and footer (terminal page) */
+  bare?: boolean;
+}
+
+const { title, description, type = 'website', jsonLd, bare = false } = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const ogImage = new URL('/og.png', Astro.site);
+const mailto = `mailto:${hero.ctaEmail}?subject=${encodeURIComponent(hero.ctaSubject)}`;
+
+const NAV = [
+  { href: '/#work',       label: 'Work' },
+  { href: '/#experience', label: 'Experience' },
+  { href: '/content/',    label: 'Content' },
+  { href: '/blog/',       label: 'Blog' },
+];
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="author" content={hero.name} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="alternate" type="application/rss+xml" title={`${hero.name} — Blog`} href="/rss.xml" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <meta name="theme-color" content="#0A0B0E" />
+
+    <meta property="og:type" content={type} />
+    <meta property="og:site_name" content={hero.name} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+
+    {jsonLd && <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}
+    <slot name="head" />
+  </head>
+  <body>
+    {!bare && (
+      <header class="site-nav">
+        <a class="logo" href="/">Ivan<span>.</span>Kramarenko</a>
+
+        <nav class="nav-links" aria-label="Main">
+          {NAV.map(({ href, label }) => <a href={href}>{label}</a>)}
+          <a href="/terminal/" class="nav-term" title="For developers: a terminal version of this site">&gt;_</a>
+        </nav>
+
+        <div class="nav-cta">
+          <a class="btn btn-ghost btn-sm" href={hero.cvUrl}>CV ↓</a>
+          <a class="btn btn-primary btn-sm" href={mailto}>Email me</a>
+        </div>
+
+        <details class="nav-mobile">
+          <summary aria-label="Menu">☰</summary>
+          <div class="nav-drawer">
+            {NAV.map(({ href, label }) => <a href={href}>{label}</a>)}
+            <a href="/terminal/">Terminal &gt;_</a>
+            <a class="btn btn-ghost" href={hero.cvUrl}>Download CV ↓</a>
+            <a class="btn btn-primary" href={mailto}>Email me</a>
+          </div>
+        </details>
+      </header>
+    )}
+
+    <main class={bare ? undefined : 'site-main'}>
+      <slot />
+    </main>
+
+    {!bare && (
+      <footer class="site-footer">
+        <span>{footer.copyright} · {footer.location}</span>
+        <span class="footer-links">
+          <a href="/content/">Content</a>
+          <a href="/blog/">Blog</a>
+          <a href="/rss.xml">RSS</a>
+          <a href="/terminal/" class="footer-term">dev? try the terminal &gt;_</a>
+        </span>
+      </footer>
+    )}
+  </body>
+</html>
